@@ -37,6 +37,18 @@ class Menu:
                     "Entry is not valid. Please, enter player birthday with the format: (aa/bb/cc) and digital"
                     "entry for the player national_id")
 
+    @staticmethod
+    def display_round(round_):
+        print(f"Round #{round_.nb} start !")
+
+    @staticmethod
+    def display_match(match):
+        print(f"{match.player_1} VS {match.player_2}")
+
+    @staticmethod
+    def ask_winner():
+        return input("Winner? 1 / 2 / 3")
+
 # creer un tournois -> creer un joueur
 # charger un tournois
 # charger un/des rapports

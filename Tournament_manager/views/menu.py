@@ -47,7 +47,11 @@ class Menu:
 
     @staticmethod
     def ask_winner():
-        return input("Winner? 1 / 2 / 3")
+        return int(input("Winner? 1 / 2 / 3"))
+
+    @staticmethod
+    def ask_round():
+        return int(input("How many rounds you want to apply ?"))
 
 # creer un tournois -> creer un joueur
 # charger un tournois

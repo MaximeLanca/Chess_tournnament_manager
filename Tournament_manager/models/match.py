@@ -5,7 +5,8 @@ class Match:
         self.player_2 = player_2
         self.winner = None
 
-    def create_matches(self, players):
+    @staticmethod
+    def create_matches(players):
         matches = []
         for i in range(0, len(players) - 1, 2):
             matches.append(player_1=players[i], player_2=players[i + 1])

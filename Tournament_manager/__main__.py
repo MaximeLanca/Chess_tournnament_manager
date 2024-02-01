@@ -1,25 +1,25 @@
-from Tournament_manager.controllers import tournament_controller
+from Tournament_manager.controllers.global_controllers import GlobalController
 from Tournament_manager.models.tournament import Tournament
-from controllers.players_controller import PlayersController
 from views.menu import Menu
-from models.rounds import Round
-from models.match import Match
 from controllers.tournament_controller import TournamentController
 
 
 def main():
     Menu.introduction()
-
-    player_list = PlayersController.get_number_of_players()
-    # TournamentController().start_tournament(player_list)
-    # for player in player_list:
-    #    tournament = TournamentController().start_tournament(player)
+    players_informations = GlobalController.get_list_of_players()
+    players_list = []
+    for player in players_informations:
+        players_list.append(player)
 
     round_number = Menu.ask_round()
+    print(players_list)
     for i in range(round_number):
-        round_ = Round(nb =i, matches = TournamentController.create_matches(player_list ))
-            display_round(round_)
-            for match in round_.matches:
-            display_match(match)
+        round_ = TournamentController.initializing_round(nb=i,
+                                                         matches=TournamentController.create_matches(players_list))
+        TournamentController.start_round(round_)
+        for match in round_.matches:
+            Menu.display_match(match)
+            match.define_winner(Menu().ask_winner())
+
 
 main()

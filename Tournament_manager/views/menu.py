@@ -66,7 +66,11 @@ class Menu:
 
     @staticmethod
     def ask_winner():
-        return int(input("Winner:\nFor Player1: Tape 1\nFor Player 2: Tape two 2\nEquality: Tape 3"))
+        return int(input("Who is the Winner:\n"
+                         "For Player1: Tape 1\n"
+                         "For Player 2: Tape two 2\n"
+                         "Equality: Tape 3\n"
+                         "Entry:"))
 
     @staticmethod
     def ask_round():

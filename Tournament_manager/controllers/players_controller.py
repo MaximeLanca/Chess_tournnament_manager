@@ -1,21 +1,22 @@
 from Tournament_manager.views.menu import Menu
-from Tournament_manager.models.players import Player
+from Tournament_manager.models.player import Player
 
 
 class PlayersController:
 
     @staticmethod
-    def do_players_list(number_of_players: int) -> dict:
+    def do_players_list(number_of_players: int) -> list:
         """Players creation """
 
-        players_list = {}
-        for number in range(0, number_of_players):
+        players_list = []
+        for number in range(1, number_of_players + 1):
             player_infos = Menu.ask_player_infos()
-            players_list[number] = Player.get_information_players(player_infos[0],
-                                                                  player_infos[1],
-                                                                  player_infos[2],
-                                                                  0)
-            print(f"The player {number + 1} has been created.")
+
+            player = Player(player_infos[0], player_infos[1], player_infos[2], 0, number)
+            players_list.append(player)
+
+            print(f"The player {number} has been created.")
+
         print(players_list)
         return players_list
 

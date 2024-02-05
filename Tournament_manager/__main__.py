@@ -6,14 +6,11 @@ from controllers.tournament_controller import TournamentController
 
 def main():
     Menu.introduction()
-    players_informations = GlobalController.get_list_of_players()
-    players_list = []
-    for player in players_informations:
-        players_list.append(player)
-
-    round_number = Menu.ask_round()
+    players_list = GlobalController.get_list_of_players()
     print(players_list)
-    for i in range(round_number):
+    round_number = Menu.ask_round()
+
+    for i in range(1, round_number + 1):
         round_ = TournamentController.initializing_round(nb=i,
                                                          matches=TournamentController.create_matches(players_list))
         TournamentController.start_round(round_)

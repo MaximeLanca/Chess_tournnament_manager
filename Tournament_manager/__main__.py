@@ -16,7 +16,9 @@ def main():
         TournamentController.start_round(round_)
         for match in round_.matches:
             Menu.display_match(match)
-            match.define_winner(Menu().ask_winner())
+            match.define_match_winner(Menu().ask_winner())
+
+        Tournament.define_tournament_winner(players_list)
 
 
 main()

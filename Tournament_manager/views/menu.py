@@ -2,6 +2,7 @@ class Menu:
 
     @staticmethod
     def menu():
+        """Menu tournament manager"""
         try:
             while True:
                 ask_information = int(input("What do you want to do ?\n"
@@ -30,29 +31,53 @@ class Menu:
         """parameters tournament"""
         while True:
             try:
-                number_of_players = int(input("Enter number of players:"
+                number_of_players = int(input("Enter a number of player between 4 and 10 and an evan number:"
                                               "\n"
                                               "\n"))
                 if number_of_players % 2 == 0 and 4 <= number_of_players:
-                    print(f"{number_of_players} players take part in the tournament.")
+                    print(f"{number_of_players} players take part in the tournament."
+                          "\n"
+                          "\n")
                     return number_of_players
                 else:
-                    print("Please, enter valid number.")
+                    print("Your entry does not meet the requirements."
+                          "\n"
+                          "\n")
             except ValueError:
-                print("Please, enter valid number.")
+                print("Please, enter valid number."
+                      "\n"
+                      "\n")
 
     @staticmethod
-    def ask_player_infos():
+    def ask_player_infos() -> list:
+        player_info = []
         while True:
             try:
                 name = input("Enter player name :").lower()
+                player_info.append(name)
+                break
+            except NameError:
+                print("Entry is not valid")
+
+        while True:
+            try:
                 birthday = input("Enter player birthday (2000-12-31):")
-                national_id = int(input("Enter player national_id :"))
-                return name, birthday, national_id
+                player_info.append(birthday)
+                break
             except TypeError:
                 print(
                     "Entry is not valid. Please, enter player birthday with the format: (aa/bb/cc) and digital"
                     "entry for the player national_id")
+
+        while True:
+            try:
+                national_id = int(input("Enter player national_id :"))
+                player_info.append(national_id)
+                break
+            except ValueError:
+                print(
+                    "Entry is not valid. Please enter digital entry for the player national_id")
+        return player_info
 
     @staticmethod
     def display_match(match):
@@ -73,11 +98,3 @@ class Menu:
         return int(input("How many rounds you want to apply ?"
                          "\n"
                          "\n"))
-
-# creer un tournois -> creer un joueur
-# charger un tournois
-# charger un/des rapports
-# exit
-#
-#
-#

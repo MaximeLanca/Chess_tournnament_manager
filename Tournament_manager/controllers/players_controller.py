@@ -17,7 +17,6 @@ class PlayersController:
 
             print(f"The player {number} has been created.")
 
-        print(players_list)
         return players_list
 
     @staticmethod

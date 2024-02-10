@@ -98,3 +98,7 @@ class Menu:
         return int(input("How many rounds you want to apply ?"
                          "\n"
                          "\n"))
+
+    @staticmethod
+    def ask_tournament_name():
+        return str(input("What is tournament name?"))

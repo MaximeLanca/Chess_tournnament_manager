@@ -6,7 +6,8 @@ from Tournament_manager.controllers.tournament_controller import TournamentContr
 class GlobalController:
 
     @staticmethod
-    def lauching_of_the_program():
+    def lunch():
+
         TournamentController.start_tournament()
         players_list = GlobalController.get_list_of_players()
         round_number = Menu.ask_round()
@@ -18,7 +19,7 @@ class GlobalController:
             for match in round_.matches:
                 Menu.display_match(match)
                 match.define_match_winner(Menu().ask_winner())
-            TournamentController.calculate_scores(players_list)
+        TournamentController.calculate_scores(players_list)
 
     @staticmethod
     def get_list_of_players() -> list:

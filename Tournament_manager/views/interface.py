@@ -102,3 +102,11 @@ class Menu:
     @staticmethod
     def ask_tournament_name():
         return str(input("What is tournament name?"))
+
+    @staticmethod
+    def display_round(nb):
+        print(f"Round #{nb} start !")
+
+    @staticmethod
+    def display_created_player(number):
+        print(f"The player {number} has been created.")

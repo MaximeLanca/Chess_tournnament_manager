@@ -1,4 +1,4 @@
-class Menu:
+class Interface:
 
     @staticmethod
     def menu():
@@ -110,3 +110,7 @@ class Menu:
     @staticmethod
     def display_created_player(number):
         print(f"The player {number} has been created.")
+
+    @staticmethod
+    def started_tournament(tournament_name):
+        print(f"The {tournament_name} starts now ! ")

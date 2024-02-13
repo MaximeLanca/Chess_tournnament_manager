@@ -1,34 +1,15 @@
-from itertools import combinations
 from Tournament_manager.models.tournament import Tournament
-from Tournament_manager.models.match import Match
-from Tournament_manager.models.round import Round
-from Tournament_manager.views.menu import Menu
+from Tournament_manager.views.interface import Interface
 
 
 class TournamentController:
 
-    @staticmethod
-    def start_tournament():
-        tournament = Tournament(name='abc')
-        Menu.introduction()
-        return tournament
+    def __init__(self, tournament_name, round_number, players_list, tournament):
+        self.tournament_name = tournament_name
+        self.round_number = round_number
+        self.players_list = players_list
+        self.tournament = tournament
 
-    @staticmethod
-    def initializing_round(nb, matches):
-        return Round(nb, matches)
-
-    @staticmethod
-    def start_round(nb: int):
-        return Round.display_round(nb)
-
-    @staticmethod
-    def create_matches(players_list: list) -> list:
-        matches = []
-        for i in combinations(players_list, 2):
-            matches.append(Match(player_1=i[0], player_2=i[1]))
-        return matches
-
-    @staticmethod
-    def calculate_scores(players_list):
-        players_ranking = Tournament.define_tournament_winner(players_list)
-        print(f"The tournament winner is: {players_ranking[0]}")
+    def start_tournament(self):
+        Interface.started_tournament(self.tournament_name)
+        self.tournament = Tournament(self.tournament_name, self.round_number, self.players_list)

@@ -8,7 +8,7 @@ def main():
             user_answer = Interface.menu()
             if user_answer == 1:
                 tournament = TournamentController()
-                tournament.launch()
+                tournament.run()
                 break
             elif user_answer == 2:
                 pass

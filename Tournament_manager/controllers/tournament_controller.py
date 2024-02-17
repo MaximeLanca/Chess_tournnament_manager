@@ -13,23 +13,26 @@ class TournamentController:
         self.tournament = None
         self.round_ = None
 
-    def launch(self):
+    def run(self):
         Interface.introduction()
         tournament_name = Interface.ask_tournament_name()
         round_number = Interface.ask_round()
 
-        players_list = PlayersController(Interface.ask_number_of_players())
-        self.tournament = Tournament(tournament_name, round_number, self.round_, players_list, )
+        players_controller = PlayersController(Interface.ask_number_of_players())
+        players_controller.do_players_list()
+        self.tournament = Tournament(tournament_name, round_number, self.round_, players_controller.players_list, )
+
+        self.start_tournament()
 
     def start_tournament(self):
         for i in range(1, self.tournament.round_number + 1):
-            self.tournament.round_ = Round(nb=i, matches=self.start_matches(self.tournament.players_list))
+            self.tournament.round_ = Round(nb=i, matches=self.start_matches())
             Interface.display_round(self.tournament.round_.nb)
             self.specify_winner()
-        self.define_tournament_winner(self.tournament.players_list)
+        self.define_tournament_winner()
 
     def specify_winner(self):
-        for match in self.tournament.round_:
+        for match in self.tournament.round_.matches:
             Interface.display_match(match)
             match.define_match_winner(Interface().ask_winner())
 
@@ -39,7 +42,6 @@ class TournamentController:
             matches.append(Match(player_1=i[0], player_2=i[1]))
         return matches
 
-    def define_tournament_winner(self) -> list:
-        self.players_list.sort(key=lambda x: x.score)
-        print(f"The tournament winner is: {self.players_list[0]}")
-        return self.players_list
+    def define_tournament_winner(self):
+        self.tournament.players_list.sort(key=lambda x: x.score)
+        print(f"The tournament winner is: {self.tournament.players_list[0]}")

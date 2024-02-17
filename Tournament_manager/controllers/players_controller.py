@@ -6,6 +6,7 @@ class PlayersController:
 
     def __init__(self, number_of_players):
         self.number_of_players = number_of_players
+        self.players_list = []
 
     def do_players_list(self):
         """Players creation """

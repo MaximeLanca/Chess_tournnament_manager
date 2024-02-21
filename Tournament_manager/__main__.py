@@ -1,11 +1,11 @@
 from Tournament_manager.controllers.tournament_controller import TournamentController
-from views.interface import Interface
+from Tournament_manager.views.menu import Menu
 
 
 def main():
     while True:
         try:
-            user_answer = Interface.menu()
+            user_answer = Menu.menu()
             if user_answer == 1:
                 tournament = TournamentController()
                 tournament.run()
@@ -19,6 +19,7 @@ def main():
                 exit()
             else:
                 print("We didn't detect any entry input.\n")
+                exit()
 
         except ValueError:
             print("Error input")

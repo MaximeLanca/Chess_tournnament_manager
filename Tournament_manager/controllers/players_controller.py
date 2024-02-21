@@ -19,4 +19,5 @@ class PlayersController:
                 birthday=player_infos[1],
                 chess_national_id=player_infos[2],
             )
+            Interface.display_created_player(number)
             self.players_list.append(player)

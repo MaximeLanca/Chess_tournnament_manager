@@ -1,5 +1,4 @@
 class Interface:
-
     @staticmethod
     def menu():
         """Menu tournament manager"""

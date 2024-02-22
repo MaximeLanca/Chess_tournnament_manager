@@ -25,4 +25,6 @@ def main():
             print("Error input")
 
 
+__name__ == "__main__"
+
 main()

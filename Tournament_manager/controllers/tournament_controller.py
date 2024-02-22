@@ -44,11 +44,25 @@ class TournamentController:
 
     def start_matches(self) -> list:
         matches = []
+        # player_layout = zip(self.tournament.players_list)
+
+        # for players in self.tournament.players_list:
+        #    self.tournament.match = Match(player_1=players[0], player_2=players[1])
+        #    matches.append(self.tournament.match)
         for i in itertools.combinations(self.tournament.players_list, 2):
             self.tournament.match = Match(player_1=i[0], player_2=i[1])
             matches.append(self.tournament.match)
         return matches
+        # if self.tournament.number_of_round > 1:
+        #    for i in self.tournament.number_of_round:
+        #        self.tournament.match = Match(player_1=player_layout[i], player_2=i[1])
+        # return matches
 
+    # for i in itertools.combinations(self.tournament.players_list, 2):
+    #     self.tournament.match = Match(player_1=i[0], player_2=i[1])
+    #     matches.append(self.tournament.match)
+    # return matches
+    # nouvelle_liste = [(x[0], y[0], y[1]) for x, y in zip(liste[:-1], liste[1:])]
     def define_tournament_winner(self):
         self.tournament.players_list.sort(key=lambda x: x.score)
         print(f"The tournament winner is: {self.tournament.players_list[0]}")

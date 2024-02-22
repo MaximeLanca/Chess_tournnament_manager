@@ -1,3 +1,6 @@
+import re
+
+
 class Interface:
     @staticmethod
     def menu():
@@ -52,17 +55,29 @@ class Interface:
         player_info = []
         while True:
             try:
-                name = input("Enter player name :").lower()
+                name = input("Enter player name :"
+                             "\n"
+                             "\n").lower()
                 player_info.append(name)
                 break
             except NameError:
-                print("Entry is not valid")
+                print("Entry is not valid"
+                      "\n"
+                      "\n")
 
         while True:
             try:
-                birthday = input("Enter player birthday (2000-12-31):")
-                player_info.append(birthday)
-                break
+                birthday = input("Enter player birthday (xxxx-yy-zz):")
+                birthday_input_format = r'\d{4}-\d{2}-\d{2}'
+                birthday_result = re.findall(birthday_input_format, birthday)
+                if birthday_result:
+                    player_info.append(birthday)
+                    break
+                else:
+                    print('No date specified'
+                          "\n"
+                          "\n")
+
             except TypeError:
                 print(
                     "Entry is not valid. Please, enter player birthday with the format: (aa/bb/cc) and digital"
@@ -70,9 +85,16 @@ class Interface:
 
         while True:
             try:
-                national_id = int(input("Enter player national_id :"))
-                player_info.append(national_id)
-                break
+                national_id = input("Enter player national_id (yyyyy):")
+                national_id_input_format = r'\d{5}'
+                national_id_result = re.findall(national_id_input_format, national_id)
+                if national_id_result:
+                    player_info.append(national_id)
+                    break
+                else:
+                    print('No id specified'
+                          "\n"
+                          "\n")
             except ValueError:
                 print(
                     "Entry is not valid. Please enter digital entry for the player national_id")

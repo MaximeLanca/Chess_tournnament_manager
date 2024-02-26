@@ -9,7 +9,7 @@ class Match:
         self.winner = winner
         if self.winner == 1:
             self.player_1.score += 1
-        if self.winner == 2:
+        elif self.winner == 2:
             self.player_2.score += 1
         else:
             self.player_1.score += 0.5

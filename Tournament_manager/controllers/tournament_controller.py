@@ -45,25 +45,34 @@ class TournamentController:
 
     def start_matches(self) -> list:
         matches = []
-        # player_layout = zip(self.tournament.players_list)
+        player_2_index = 0
+        items = list(range(len(self.tournament.players_list)))
+        history_pairs = []
+        while items:
+            player_1 = self.tournament.players_list[items[0]]
+            j = 1
+            player_2 = self.tournament.players_list[items[j]]
 
-        # for players in self.tournament.players_list:
-        #    self.tournament.match = Match(player_1=players[0], player_2=players[1])
-        #    matches.append(self.tournament.match)
-        for i in itertools.combinations(self.tournament.players_list, 2):
-            match = Match(player_1=i[0], player_2=i[1])
+            while (player_1, player_2) in history_pairs and j < len(items):
+                player_2 = self.tournament.players_list[items[j]]
+                player_2_index = items[j]
+                j += 1
+
+            match = Match(player_1, player_2)
             matches.append(match)
+            history_pairs.append((player_1, player_2))
+
+            items.remove(player_2_index)
+            items.remove(items[0])
+            # deepcopy()
+
+            print(items)
         return matches
-        # if self.tournament.number_of_round > 1:
-        #    for i in self.tournament.number_of_round:
-        #        self.tournament.match = Match(player_1=player_layout[i], player_2=i[1])
+        # for i in itertools.combinations(self.tournament.players_list, 2):
+        #    match = Match(player_1=i[0], player_2=i[1])
+        #    matches.append(match)
         # return matches
 
-    # for i in itertools.combinations(self.tournament.players_list, 2):
-    #     self.tournament.match = Match(player_1=i[0], player_2=i[1])
-    #     matches.append(self.tournament.match)
-    # return matches
-    # nouvelle_liste = [(x[0], y[0], y[1]) for x, y in zip(liste[:-1], liste[1:])]
     def define_tournament_winner(self):
         self.tournament.players_list.sort(key=lambda x: x.score, reverse=True)
         print(f"The tournament winner is: {self.tournament.players_list[0]} with"

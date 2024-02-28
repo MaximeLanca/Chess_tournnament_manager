@@ -29,6 +29,11 @@ class Interface:
               "\n")
 
     @staticmethod
+    def second_introduction():
+        """Game introduction"""
+        print("Speed run")
+
+    @staticmethod
     def ask_number_of_players() -> int:
         """parameters tournament"""
         while True:

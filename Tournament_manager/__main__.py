@@ -19,6 +19,10 @@ def main():
             elif user_answer == 4:
                 print("You have stopped the tournament manager.\nGood bye")
                 exit()
+            elif user_answer == 5:
+                tournament = TournamentController()
+                tournament.speed_run()
+
             else:
                 print("We didn't detect any entry input.\n")
                 exit()

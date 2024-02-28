@@ -21,3 +21,36 @@ class PlayersController:
             )
             Interface.display_created_player(number)
             self.players_list.append(player)
+
+    def quick_do_players_list(self):
+
+        player_1 = Player(
+            number_of_player=1,
+            name="Maxime",
+            birthday="1987-02-08",
+            chess_national_id=12345,
+        )
+        player_2 = Player(
+            number_of_player=2,
+            name="Damien",
+            birthday="1989-05-02",
+            chess_national_id=54321,
+        )
+
+        player_3 = Player(
+            number_of_player=3,
+            name="Marc",
+            birthday="1980-09-01",
+            chess_national_id=56789,
+        )
+
+        player_4 = Player(
+            number_of_player=4,
+            name="Augustin",
+            birthday="1995-09-27",
+            chess_national_id=98765,
+        )
+
+        list = [player_1, player_2, player_3, player_4]
+        for player in list:
+            self.players_list.append(player)

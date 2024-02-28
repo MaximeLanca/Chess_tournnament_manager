@@ -9,6 +9,7 @@ class Menu:
                                             "Enter ( 2 ) for to load tournament\n"
                                             "Enter ( 3 ) for to create report\n"
                                             "Enter ( 4 ) for to stop application\n"
+                                            "Enter ( 5 ) for to Speed Run\n"
                                             "\n"
                                             "\n"
                                             ))

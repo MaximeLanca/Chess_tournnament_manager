@@ -23,7 +23,6 @@ class PlayersController:
             self.players_list.append(player)
 
     def quick_do_players_list(self):
-
         player_1 = Player(
             number_of_player=1,
             name="Maxime",
@@ -54,3 +53,4 @@ class PlayersController:
         list = [player_1, player_2, player_3, player_4]
         for player in list:
             self.players_list.append(player)
+        return list

@@ -107,12 +107,12 @@ class Interface:
 
     @staticmethod
     def display_match(match):
-        print(f"{match.player_1} VS {match.player_2}")
+        print(f"Player {match.player_1.number_of_player} VS Player {match.player_2.number_of_player}")
 
     @staticmethod
     def ask_winner():
         return int(input("Who is the Winner:\n"
-                         "For Player1: Tape 1\n"
+                         "For Player 1: Tape 1\n"
                          "For Player 2: Tape two 2\n"
                          "Equality: Tape 3\n"
                          "Entry:"

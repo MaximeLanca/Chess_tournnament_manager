@@ -1,7 +1,4 @@
 import copy
-import itertools
-from re import M
-from typing import List
 from Tournament_manager.controllers.players_controller import PlayersController
 from Tournament_manager.models.tournament import Tournament
 from Tournament_manager.models.round import Round
@@ -54,13 +51,17 @@ class TournamentController:
         self.define_tournament_winner()
 
     def specify_match_winner(self, round_):
-        for match in round_.matches:
-            Interface.display_match(match)
-            match.define_match_winner(Interface().ask_winner())
-            # self.tournament.save
+        match = round_.matches
+        Interface.display_match(match)
+        match.define_match_winner(Interface().ask_winner())
+
+    # for match in round_.matches:
+    #    Interface.display_match(match)
+    #    match.define_match_winner(Interface().ask_winner())
+    # self.tournament.save
 
     def specify_players(self, round_number):
-        matches = []
+        history_pairs = []
         players_list_copy = copy.deepcopy(self.tournament.players_list)
         Interface.display_round(round_number)
 
@@ -69,15 +70,14 @@ class TournamentController:
             copied_player_1 = players_list_copy[0]
             copied_player_2 = players_list_copy[index]
 
-            history_pairs = self.save_history_pairs((copied_player_1, copied_player_2))
-
             while (copied_player_1, copied_player_2) in history_pairs and index < len(players_list_copy):
                 copied_player_2 = players_list_copy[index]
                 index += 1
-            pairs_of_players = self.map_players(copied_player_1, copied_player_2)
 
-            match = Match(pairs_of_players[0], pairs_of_players[1])
-            matches.append(match)
+            history_pairs = self.save_history_pairs((copied_player_1, copied_player_2))
+
+            pairs_of_players = self.map_players(copied_player_1, copied_player_2)
+            matches = Match(pairs_of_players[0], pairs_of_players[1])
             round_ = Round(round_number, matches)
             self.tournament.add_round(round_)
             self.specify_match_winner(round_)

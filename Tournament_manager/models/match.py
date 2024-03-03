@@ -1,9 +1,16 @@
+from tinydb import TinyDB
+
+
 class Match:
 
     def __init__(self, player_1, player_2):
         self.player_1 = player_1
         self.player_2 = player_2
         self.winner = None
+
+        db = TinyDB("../data/tournament/db.json")
+        db.insert(player_1)
+        db.insert(player_2)
 
     def define_match_winner(self, winner):
         self.winner = winner

@@ -1,5 +1,6 @@
-from Tournament_manager.controllers.tournament_controller import TournamentController
-from Tournament_manager.views.menu import Menu
+from controllers.tournament_controller import TournamentController
+from views.menu import Menu
+from tinydb import TinyDB
 
 
 def main():
@@ -11,8 +12,8 @@ def main():
                 tournament.run()
                 break
             elif user_answer == 2:
-                loaded_tournament = TournamentController.load_tournament()
-                # db.all()
+                db = TinyDB("../data/tournament/db.json")
+                db.all()
                 pass
             elif user_answer == 3:
                 pass

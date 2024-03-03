@@ -4,7 +4,6 @@ from Tournament_manager.models.tournament import Tournament
 from Tournament_manager.models.round import Round
 from Tournament_manager.models.match import Match
 from Tournament_manager.views.interface import Interface
-from Tournament_manager.models.database import Database
 
 
 class TournamentController:
@@ -18,11 +17,15 @@ class TournamentController:
     def run(self):
         Interface.introduction()
         tournament_name = Interface.ask_tournament_name()
+        tournament_start_date = Interface.ask_tournament_start_date()
+        tournament_end_date = Interface.ask_tournament_end_date()
         number_of_round = Interface.ask_round()
 
         players_controller = PlayersController(Interface.ask_number_of_players())
         players_controller.do_players_list()
         self.tournament = Tournament(tournament_name,
+                                     tournament_start_date,
+                                     tournament_end_date,
                                      number_of_round,
                                      players_controller.players_list,
                                      )
@@ -35,9 +38,13 @@ class TournamentController:
         tournament_name = "Quick tournament"
         number_of_round = 2
         number_of_players = 4
+        tournament_start_date = "00-00-0000"
+        tournament_end_date = "00-00-0001"
         players_controller = PlayersController(number_of_players)
         players_controller.quick_do_players_list()
         self.tournament = Tournament(tournament_name,
+                                     tournament_start_date,
+                                     tournament_end_date,
                                      number_of_round,
                                      players_controller.players_list,
                                      )
@@ -53,11 +60,8 @@ class TournamentController:
     def specify_match_winner(self, round_):
         match = round_.matches
         Interface.display_match(match)
-        match.define_match_winner(Interface().ask_winner())
+        match.define_match_winner(Interface().ask_match_winner())
 
-    # for match in round_.matches:
-    #    Interface.display_match(match)
-    #    match.define_match_winner(Interface().ask_winner())
     # self.tournament.save
 
     def specify_players(self, round_number):
@@ -105,29 +109,8 @@ class TournamentController:
         print(self.save_match_list)
         return self.save_match_list
 
-        # matches = []
-        # player_2_index = 0
-        # items = list(range(len(self.tournament.players_list)))
-        # history_pairs = []
-        # while items:
-        #    player_1 = self.tournament.players_list[items[0]]
-        #    j = 1
-        #    player_2 = self.tournament.players_list[items[j]]
-        #
-        #    while (player_1, player_2) in history_pairs and j < len(items):
-        #        player_2 = self.tournament.players_list[items[j]]
-        #        player_2_index = items[j]
-        #        j += 1
-        #
-        #    match = Match(player_1, player_2)
-        #    matches.append(match)
-        #    history_pairs.append((player_1, player_2))
-        #
-        #    items.remove(player_2_index)
-        #    items.remove(items[0])
-        # print(items)
-
     def define_tournament_winner(self):
         self.tournament.players_list.sort(key=lambda x: x.score, reverse=True)
         print(f"The tournament winner is: {self.tournament.players_list[0]} with "
               f"{self.tournament.players_list[0].score} points")
+        Interface.players_ranking(self.tournament.tournament_name, self.tournament.players_list)

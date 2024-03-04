@@ -7,6 +7,6 @@ class Round:
         self.round_number = round_number
         self.matches = matches
 
-        db = TinyDB("../data/tournament/db.json")
-        db.insert(round_number)
-        db.insert(matches)
+    def save_round_db(self):
+        db = TinyDB("../Tournament_manager/data/tournaments/round.json")
+        db.insert({"Round number": self.round_number, "Matches": self.matches})

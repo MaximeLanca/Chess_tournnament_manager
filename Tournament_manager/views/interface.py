@@ -39,25 +39,17 @@ class Interface:
         """players numbers for start tournament"""
         while True:
             try:
-                number_of_players = int(input("Enter a number of player between 4 and 10 and an evan number:"
-                                              "\n"
-                                              "\n"))
+                number_of_players = int(input("Enter a number of player between 4 and 10 and an evan number :"))
                 if number_of_players % 2 == 0 and 4 <= number_of_players:
-                    print(f"{number_of_players} players take part in the tournament."
-                          "\n"
-                          "\n")
+                    print(f"{number_of_players} players take part in the tournament.")
                     return number_of_players
                 else:
                     number_of_players = 4
-                    print("The standard number of rounds has been defined."
-                          "\n"
-                          "\n")
+                    print("The standard number of rounds has been defined.")
                     return number_of_players
 
             except ValueError:
-                print("Please, enter valid number."
-                      "\n"
-                      "\n")
+                print("Please, enter valid number.")
 
     @staticmethod
     def ask_player_infos() -> list:
@@ -65,37 +57,35 @@ class Interface:
         player_infos = []
         while True:
             try:
-                name = input("Enter player name :"
-                             "\n"
-                             "\n").lower()
+                name = input("Enter player name :").lower()
                 player_infos.append(name)
                 break
             except NameError:
-                print("Entry is not valid"
-                      "\n"
-                      "\n")
+                print("Entry is not valid")
 
         while True:
             try:
-                date_str = input("Please enter the player birthday ( format YYYY-MM ) :")
+                date_str = input("Please enter the player birthday ( format YYYY-MM-DD ) :")
                 birthday_date = str(datetime.strptime(date_str, "%Y-%m-%d"))
-                player_infos.append(birthday_date)
+                if birthday_date:
+                    player_infos.append(birthday_date)
+                    break
+                else:
+                    print('No birthday specified')
             except ValueError:
                 print("Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
 
         while True:
             try:
-                national_id = str(input("Enter player national_id (yyyyy):"))
-                national_id_input_format = r'\d{5}'
-                national_id_result = re.findall(national_id_input_format, national_id)
+                national_id = str(input("Enter player national_id ( format AB123) :"))
+                regex_pattern = r'^[A-Za-z]{2}\d{3}$'
+                national_id_result = re.findall(regex_pattern, national_id)
 
                 if national_id_result:
                     player_infos.append(national_id)
                     break
                 else:
-                    print('No id specified'
-                          "\n"
-                          "\n")
+                    print('No id specified')
             except ValueError:
                 print(
                     "Entry is not valid. Please enter digital entry for the player national_id")
@@ -128,16 +118,12 @@ class Interface:
     @staticmethod
     def ask_tournament_name():
         """Tournament name"""
-        return str(input("What is tournament name?"
-                         "\n"
-                         "\n"))
+        return str(input("What is tournament name? :"))
 
     @staticmethod
     def ask_tournament_location():
         """tournament location"""
-        return str(input("What is tournament location?"
-                         "\n"
-                         "\n"))
+        return str(input("What is tournament location? :"))
 
     @staticmethod
     def ask_tournament_start_date():

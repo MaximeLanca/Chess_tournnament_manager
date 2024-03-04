@@ -8,9 +8,9 @@ class Match:
         self.player_2 = player_2
         self.winner = None
 
-        db = TinyDB("../data/tournament/db.json")
-        db.insert(player_1)
-        db.insert(player_2)
+    def save_match_db(self):
+        db = TinyDB("../Tournament_manager/data/tournaments/match.json")
+        db.insert({"Player 1": self.player_1, "Player 2": self.player_2})
 
     def define_match_winner(self, winner):
         self.winner = winner

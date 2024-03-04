@@ -29,7 +29,7 @@ class TournamentController:
                                      number_of_round,
                                      players_controller.players_list,
                                      )
-
+        self.tournament.save_tournament_db()
         Interface.started_tournament(self.tournament.tournament_name)
         self.start_tournament()
 
@@ -48,8 +48,9 @@ class TournamentController:
                                      number_of_round,
                                      players_controller.players_list,
                                      )
-
+        self.tournament.save_tournament_db()
         Interface.started_tournament(self.tournament.tournament_name)
+
         self.start_tournament()
 
     def start_tournament(self):
@@ -61,8 +62,6 @@ class TournamentController:
         match = round_.matches
         Interface.display_match(match)
         match.define_match_winner(Interface().ask_match_winner())
-
-    # self.tournament.save
 
     def specify_players(self, round_number):
         history_pairs = []

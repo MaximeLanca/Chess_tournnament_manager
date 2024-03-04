@@ -1,4 +1,4 @@
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
 
 
 class Tournament:
@@ -11,13 +11,14 @@ class Tournament:
         self.players_list = players_list
         self.rounds = rounds or []
 
-        db = TinyDB("../data/tournament/db.json")
-        db.insert(tournament_name)
-        db.insert(start_date)
-        db.insert(end_date)
-        db.insert(number_of_round)
-        db.insert(players_list)
-        db.insert(rounds)
+    def save_tournament_db(self):
+        db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
+        db.insert({"Tournament Name": self.tournament_name,
+                   "Start date": self.start_date,
+                   "End date": self.end_date,
+                   "Number of round": self.number_of_round,
+                   "Players List": self.players_list,
+                   "Rounds": self.rounds})
 
     def add_round(self, round_):
         self.rounds.append(round_)

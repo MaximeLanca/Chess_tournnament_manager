@@ -1,4 +1,4 @@
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
 
 
 class Player:
@@ -10,12 +10,13 @@ class Player:
         self.chess_national_id = chess_national_id
         self.score = score or 0
 
-        db = TinyDB("../data/tournament/db.json")
-        db.insert(number_of_player)
-        db.insert(name)
-        db.insert(birthday)
-        db.insert(chess_national_id)
-        db.insert(score)
+    def save_player_db(self):
+        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        db.insert({"Number of player": self.number_of_player,
+                   "Name": self.name,
+                   "Birthday": self.birthday,
+                   "Chess national": self.chess_national_id,
+                   "Score": self.score})
 
     def __str__(self):
         return f"Player {self.number_of_player}"

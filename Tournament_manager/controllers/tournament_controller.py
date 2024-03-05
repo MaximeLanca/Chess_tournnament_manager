@@ -17,6 +17,7 @@ class TournamentController:
     def run(self):
         Interface.introduction()
         tournament_name = Interface.ask_tournament_name()
+        tournament_location = Interface.ask_tournament_location()
         tournament_start_date = Interface.ask_tournament_start_date()
         tournament_end_date = Interface.ask_tournament_end_date()
         number_of_round = Interface.ask_round()
@@ -24,6 +25,7 @@ class TournamentController:
         players_controller = PlayersController(Interface.ask_number_of_players())
         players_controller.do_players_list()
         self.tournament = Tournament(tournament_name,
+                                     tournament_location,
                                      tournament_start_date,
                                      tournament_end_date,
                                      number_of_round,
@@ -36,6 +38,7 @@ class TournamentController:
     def speed_run(self):
         Interface.second_introduction()
         tournament_name = "Quick tournament"
+        tournament_location = "Paris"
         number_of_round = 2
         number_of_players = 4
         tournament_start_date = "00-00-0000"
@@ -43,10 +46,11 @@ class TournamentController:
         players_controller = PlayersController(number_of_players)
         players_controller.quick_do_players_list()
         self.tournament = Tournament(tournament_name,
+                                     tournament_location,
                                      tournament_start_date,
                                      tournament_end_date,
                                      number_of_round,
-                                     players_controller.players_list,
+                                     players_controller.players_list
                                      )
         self.tournament.save_tournament_db()
         Interface.started_tournament(self.tournament.tournament_name)
@@ -64,6 +68,8 @@ class TournamentController:
         match.define_match_winner(Interface().ask_match_winner())
 
     def specify_players(self, round_number):
+        # le problème vient de la variable history_pair. Il est vide et le probleme ne peut pas se souvenir quel match a été joué
+        # faire deux iterations: un for sur les match et un for sur les rounds puis les enregistrer pour eviter les doublons
         history_pairs = []
         players_list_copy = copy.deepcopy(self.tournament.players_list)
         Interface.display_round(round_number)
@@ -81,6 +87,7 @@ class TournamentController:
 
             pairs_of_players = self.map_players(copied_player_1, copied_player_2)
             matches = Match(pairs_of_players[0], pairs_of_players[1])
+            matches.save_match_db()
             round_ = Round(round_number, matches)
             self.tournament.add_round(round_)
             self.specify_match_winner(round_)
@@ -105,7 +112,6 @@ class TournamentController:
 
     def save_history_pairs(self, pair_of_players):
         self.save_match_list.append(pair_of_players)
-        print(self.save_match_list)
         return self.save_match_list
 
     def define_tournament_winner(self):

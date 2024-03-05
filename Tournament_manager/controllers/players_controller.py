@@ -56,4 +56,4 @@ class PlayersController:
             self.player = player
             self.player.save_player_db()
             self.players_list.append(self.player)
-        return list
+        return self.players_list

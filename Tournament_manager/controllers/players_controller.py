@@ -1,11 +1,13 @@
+from tinydb import TinyDB, Query
+
 from Tournament_manager.models.player import Player
 from Tournament_manager.views.interface import Interface
 
 
 class PlayersController:
 
-    def __init__(self, number_of_players, player=None):
-        self.number_of_players = number_of_players
+    def __init__(self, number_of_players=None, player=None):
+        self.number_of_players = number_of_players or None
         self.players_list = []
         self.player = player or None
 
@@ -23,7 +25,26 @@ class PlayersController:
             Interface.display_created_player(number)
             self.players_list.append(self.player)
 
+    def get_db_data_players(self):
+        db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        loaded_players = db_players.all()
+        for data in loaded_players:
+            self.player = Player(number_of_player=data["Number of player"],
+                                 name=data["Name"],
+                                 birthday=data["Birthday"],
+                                 chess_national_id=data["Chess national ID"],
+                                 score=data["Score"])
+            self.players_list.append(self.player)
+        return self.players_list
+
+    def update_players_score(self, pairs_of_players):
+        db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        info = Query()
+        for player in pairs_of_players:
+            db_players.update({"Score": player.score}, info["Chess national ID"] == player.chess_national_id)
+
     def quick_do_players_list(self):
+
         player_1 = Player(
             number_of_player=1,
             name="Maxime",
@@ -51,8 +72,8 @@ class PlayersController:
             chess_national_id=98765,
         )
 
-        list = [player_1, player_2, player_3, player_4]
-        for player in list:
+        list_ = [player_1, player_2, player_3, player_4]
+        for player in list_:
             self.player = player
             self.player.save_player_db()
             self.players_list.append(self.player)

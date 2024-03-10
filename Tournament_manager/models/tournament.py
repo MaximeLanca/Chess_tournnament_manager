@@ -15,22 +15,27 @@ class Tournament:
 
     def save_tournament_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
+        db.truncate()
+        db.insert(self.to_dict())
 
-    #    db.insert(self.list_data_for_backup())
-
-    def list_data_for_backup(self):
-        i = 1
-        for player in self.players_list:
-            dict = {f"Player {i}": player}
-            i += 1
-
+    def to_dict(self):
         return {"Tournament Name": self.tournament_name,
                 "Tournament location": self.tournament_location,
                 "Start date": self.start_date,
                 "End date": self.end_date,
                 "Number of round": self.number_of_round,
-                "Players List": self.players_list,
-                "Rounds": self.rounds}
+                # "Players List": self.players_list,
+                # "Rounds": self.rounds
+                }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["Tournament Name"],
+                   data["Tournament location"],
+                   data["Start"],
+                   data["End"],
+                   data["Number of round"],
+                   data["Rounds"])
 
     def add_round(self, round_):
         self.rounds.append(round_)

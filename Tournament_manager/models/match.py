@@ -8,11 +8,6 @@ class Match:
         self.player_2 = player_2
         self.winner = None
 
-    def save_match_db(self):
-        db = TinyDB("../Tournament_manager/data/tournaments/match.json")
-
-    #        db.insert(self.list_players_for_backup())
-
     def list_players_for_backup(self):
         return {"Player 1": self.player_1, "Player 2": self.player_2}
 

@@ -103,27 +103,24 @@ class Interface:
                          "For Player 1: Tape 1\n"
                          "For Player 2: Tape 2\n"
                          "Equality: Tape 3\n"
-                         "Stop the tournament: Tape 4"
+                         "Stop the tournament: Tape 4\n"
                          "Entry:"
-                         "\n"
-                         "\n"))
+                         ))
 
     @staticmethod
     def ask_round():
         """rounds number"""
-        return int(input("How many rounds you want to apply ?"
-                         "\n"
-                         "\n"))
+        return int(input("How many rounds you want to apply? : "))
 
     @staticmethod
     def ask_tournament_name():
         """Tournament name"""
-        return str(input("What is tournament name? :"))
+        return str(input("What is tournament name? : "))
 
     @staticmethod
     def ask_tournament_location():
         """tournament location"""
-        return str(input("What is tournament location? :"))
+        return str(input("What is tournament location? : "))
 
     @staticmethod
     def ask_tournament_start_date():

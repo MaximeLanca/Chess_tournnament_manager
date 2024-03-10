@@ -10,17 +10,29 @@ class Player:
         self.chess_national_id = chess_national_id
         self.score = score or 0
 
+    def __str__(self):
+        return f"Player {self.number_of_player}"
+
     def save_player_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        db.insert(self.to_dict())
 
-    #        db.insert(self.list_data_for_backup())
-
-    def list_data_for_backup(self):
+    def to_dict(self):
         return {"Number of player": self.number_of_player,
                 "Name": self.name,
                 "Birthday": self.birthday,
-                "Chess national": self.chess_national_id,
+                "Chess national ID": self.chess_national_id,
                 "Score": self.score}
 
-    def __str__(self):
-        return f"Player {self.number_of_player}"
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["Number of player"],
+                   data["Name"],
+                   data["Birthday"],
+                   data["Chess national ID"],
+                   data["Score"])
+
+    @classmethod
+    def remove_players(cls):
+        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        db.truncate()

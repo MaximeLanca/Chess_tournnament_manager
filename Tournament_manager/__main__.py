@@ -1,3 +1,4 @@
+from Tournament_manager.models.player import Player
 from controllers.tournament_controller import TournamentController
 from views.menu import Menu
 from tinydb import TinyDB
@@ -8,19 +9,21 @@ def main():
         try:
             user_answer = Menu.menu()
             if user_answer == 1:
+                Player.remove_players()
                 tournament = TournamentController()
                 tournament.run()
-                break
+
             elif user_answer == 2:
-                db = TinyDB("../data/tournament/db.json")
-                db.all()
-                pass
-            elif user_answer == 3:
-                pass
+                tournament = TournamentController()
+                tournament.load_tournament()
+                break
+
             elif user_answer == 4:
                 print("You have stopped the tournament manager.\nGood bye")
                 exit()
+
             elif user_answer == 5:
+                Player.remove_players()
                 tournament = TournamentController()
                 tournament.speed_run()
 

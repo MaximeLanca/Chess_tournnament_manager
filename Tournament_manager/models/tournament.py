@@ -24,7 +24,7 @@ class Tournament:
                 "Start date": self.start_date,
                 "End date": self.end_date,
                 "Number of round": self.number_of_round,
-                "Rounds": self.rounds
+                # "Rounds": self.rounds
                 }
 
     @classmethod
@@ -33,8 +33,8 @@ class Tournament:
                    data["Tournament location"],
                    data["Start"],
                    data["End"],
-                   data["Number of round"],
-                   data["Rounds"])
+                   data["Number of round"])
+        # data["Rounds"])
 
     def add_round(self, round_):
         self.rounds.append(round_)

@@ -24,8 +24,7 @@ class Tournament:
                 "Start date": self.start_date,
                 "End date": self.end_date,
                 "Number of round": self.number_of_round,
-                # "Players List": self.players_list,
-                # "Rounds": self.rounds
+                "Rounds": self.rounds
                 }
 
     @classmethod

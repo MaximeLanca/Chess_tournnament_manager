@@ -20,7 +20,6 @@ class Match:
 
     def save_match_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/match.json")
-        db.truncate()
         db.insert(self.to_dict())
 
     def to_dict(self):

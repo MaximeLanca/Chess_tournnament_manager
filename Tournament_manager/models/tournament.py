@@ -13,9 +13,9 @@ class Tournament:
         self.players_list = players_list
         self.rounds = rounds or []
 
-    def save_tournament_db(self, remove_data):
+    def save_tournament_db(self, current_match):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
-        if remove_data is True:
+        if current_match is False:
             db.truncate()
         db.insert(self.to_dict())
 

@@ -10,11 +10,10 @@ class PlayersController:
         self.number_of_players = number_of_players or None
         self.players_list = []
         self.player = player or None
+        self.saved_data_players = []
 
     def get_data_players(self):
         """Players and lists creation """
-        saved_data_players = []
-
         for number in range(1, (self.number_of_players + 1)):
             player_infos = Interface.ask_player_infos()
             self.player = Player(
@@ -23,15 +22,15 @@ class PlayersController:
                 birthday=player_infos[1],
                 chess_national_id=player_infos[2],
             )
-            saved_data_players.append({"Number of player": number,
-                                       "Name": player_infos[0],
-                                       "Birthday": player_infos[1],
-                                       "Chess_national_id": player_infos[2]}
-                                      )
+            self.saved_data_players.append({"Number of player": number,
+                                            "Name": player_infos[0],
+                                            "Birthday": player_infos[1],
+                                            "Chess_national_id": player_infos[2]}
+                                           )
             Interface.display_created_player(number)
             self.players_list.append(self.player)
 
-        return saved_data_players
+        return self.saved_data_players
 
     def get_db_data_players(self):
         db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
@@ -47,11 +46,11 @@ class PlayersController:
 
         return self.players_list
 
-    def update_players_score(self, pairs_of_players):
-        db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
-        info = Query()
-        for player in pairs_of_players:
-            db_players.update({"Score": player.score}, info["Chess national ID"] == player.chess_national_id)
+    # def update_players_score(self, pairs_of_players):
+    #     db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
+    #     info = Query()
+    #     for player in pairs_of_players:
+    #         db_players.update({"Score": player.score}, info["Chess national ID"] == player.chess_national_id)
 
     def quick_do_players_list(self):
 
@@ -86,4 +85,10 @@ class PlayersController:
         for player in list_:
             self.player = player
             self.players_list.append(self.player)
+
+            self.saved_data_players.append({"Number of player": player.number_of_player,
+                                            "Name": player.name,
+                                            "Birthday": player.birthday,
+                                            "Chess_national_id": player.chess_national_id
+                                            })
         return self.players_list

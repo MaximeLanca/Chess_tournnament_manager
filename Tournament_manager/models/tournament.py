@@ -13,19 +13,19 @@ class Tournament:
         self.players_list = players_list
         self.rounds = rounds or []
 
-    def save_tournament_db(self, players_list, round_number, matches):
+    def save_tournament_db(self, data_players, round_number, matches):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
-        db.insert(self.to_dict(players_list, round_number, matches))
+        db.insert(self.to_dict(data_players, round_number, matches))
 
-    def to_dict(self, players_list, round_number, matches):
+    def to_dict(self, data_players, round_number, matches):
         return {"Tournament Name": self.tournament_name,
                 "Tournament location": self.tournament_location,
                 "Start date": self.start_date,
                 "End date": self.end_date,
                 "Number of round": self.number_of_round,
-                "Players list": players_list,
+                "Data players": data_players,
                 "Round Number": round_number,
-                "matches": matches
+                "Matches": matches
                 }
 
     @classmethod
@@ -34,7 +34,10 @@ class Tournament:
                    data["Tournament location"],
                    data["Start"],
                    data["End"],
-                   data["Number of round"]
+                   data["Number of round"],
+                   data["Data players"],
+                   data["Round Number"],
+                   data["Matches"]
                    )
 
     def add_round(self, round_):

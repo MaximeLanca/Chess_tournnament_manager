@@ -1,7 +1,5 @@
-from Tournament_manager.models.player import Player
 from controllers.tournament_controller import TournamentController
 from views.menu import Menu
-from tinydb import TinyDB
 
 
 def main():
@@ -9,7 +7,6 @@ def main():
         try:
             user_answer = Menu.menu()
             if user_answer == 1:
-                Player.remove_players()
                 tournament = TournamentController()
                 tournament.run()
 
@@ -23,7 +20,6 @@ def main():
                 exit()
 
             elif user_answer == 5:
-                Player.remove_players()
                 tournament = TournamentController()
                 tournament.speed_run()
 
@@ -35,6 +31,7 @@ def main():
             print("Error input")
 
 
-__name__ == "__main__"
+if __name__ == "__main__":
+    main()
 
 main()

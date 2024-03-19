@@ -1,5 +1,6 @@
 import re
 from datetime import datetime
+from colorama import Fore, Style, Back
 
 
 class Interface:
@@ -18,21 +19,21 @@ class Interface:
                                             ))
                 return ask_information
         except ValueError:
-            print("You are trying to enter an invalid value.\nTap ( 1 ) or ( 2 ) or (3).")
+            print(Fore.RED + "You are trying to enter an invalid value.\nTap ( 1 ) or ( 2 ) or (3).")
 
     @staticmethod
     def introduction():
         """Game introduction"""
-        print("Welcome to the local chess tournament !\nThe tournament will feature a minimum of four players and a "
-              "maximum of ten.\nEach game will be played with a maximum of 100 moves.\nThe winner of one match will "
-              "play with the winner of another match"
-              "\n"
-              "\n")
+        print(Fore.BLUE + "Welcome to the local chess tournament !\nThe tournament will feature a minimum of four "
+                          "players and a maximum of ten.\nEach game will be played with a maximum of 100 moves.\nThe "
+                          "winner of one match will play with the winner of another match"
+                          "\n"
+                          "\n")
 
     @staticmethod
     def second_introduction():
         """Game introduction"""
-        print("Speed run")
+        print(Fore.BLUE + "Speed run")
 
     @staticmethod
     def ask_number_of_players() -> int:
@@ -41,15 +42,15 @@ class Interface:
             try:
                 number_of_players = int(input("Enter a number of player between 4 and 10 and an evan number :"))
                 if number_of_players % 2 == 0 and 4 <= number_of_players:
-                    print(f"{number_of_players} players take part in the tournament.")
+                    print(Fore.BLUE + f"{number_of_players} players take part in the tournament.")
                     return number_of_players
                 else:
                     number_of_players = 4
-                    print("The standard number of rounds has been defined.")
+                    print(Fore.BLUE + "The standard number of rounds has been defined.")
                     return number_of_players
 
             except ValueError:
-                print("Please, enter valid number.")
+                print(Fore.RED + "Please, enter valid number.")
 
     @staticmethod
     def ask_player_infos() -> list:
@@ -61,7 +62,7 @@ class Interface:
                 player_infos.append(name)
                 break
             except NameError:
-                print("Entry is not valid")
+                print(Fore.RED + "Entry is not valid")
 
         while True:
             try:
@@ -71,10 +72,10 @@ class Interface:
                     player_infos.append(birthday_date)
                     break
                 else:
-                    print('No birthday specified')
+                    print(Fore.RED + 'No birthday specified')
             except ValueError:
-                print("Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
-
+                print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
+        # TODO : Vérication d'un players national ID unique
         while True:
             try:
                 national_id = str(input("Enter player national_id ( format AB123) :"))
@@ -85,16 +86,15 @@ class Interface:
                     player_infos.append(national_id)
                     break
                 else:
-                    print('No id specified')
+                    print(Fore.RED + 'No id specified')
             except ValueError:
-                print(
-                    "Entry is not valid. Please enter digital entry for the player national_id")
+                print(Fore.RED + "Entry is not valid. Please enter digital entry for the player national_id")
         return player_infos
 
     @staticmethod
     def display_match(match):
         """player's match"""
-        print(f"Player {match.player_1.number_of_player} VS Player {match.player_2.number_of_player}")
+        print(Fore.GREEN + f"Player {match.player_1.number_of_player} VS Player {match.player_2.number_of_player}")
 
     @staticmethod
     def ask_match_winner():
@@ -131,7 +131,7 @@ class Interface:
                 start_date = datetime.strptime(date_str, "%Y-%m-%d")
                 return start_date
             except ValueError:
-                print("Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
+                print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
 
     @staticmethod
     def ask_tournament_end_date():
@@ -142,22 +142,22 @@ class Interface:
                 end_date = datetime.strptime(date_str, "%Y-%m-%d")
                 return end_date
             except ValueError:
-                print("Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
+                print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
 
     @staticmethod
     def display_round(nb):
         """display round number"""
-        print(f"Round #{nb} start !")
+        print(Fore.GREEN + f"Round #{nb} start !")
 
     @staticmethod
     def display_created_player(number):
         """display new player"""
-        print(f"The player {number} has been created.")
+        print(Fore.BLUE + f"The player {number} has been created.")
 
     @staticmethod
     def started_tournament(tournament_name):
         """introduces the tournament name"""
-        print(f"The {tournament_name} tournament starts now ! ")
+        print(Fore.GREEN + f"The {tournament_name} tournament starts now ! ")
 
     @staticmethod
     def players_ranking(tournament_name, players_list):
@@ -167,6 +167,13 @@ class Interface:
               "\n"
               "\n")
         for player in players_list:
-            print("----------------------------------------------------------------")
-            print(f"Player {player.number_of_player} | Name:{player.name} | Score: {player.score} points")
-            print("----------------------------------------------------------------")
+            print(Back.MAGENTA + "----------------------------------------------------------------")
+            print(
+                Back.MAGENTA + f"Player {player.number_of_player} | Name:{player.name} | Score: {player.score} points")
+            print(Back.MAGENTA + "----------------------------------------------------------------")
+
+    @staticmethod
+    def ask_tournament_for_to_load():
+        """ask tournament to load in DB"""
+        answer = input("What is the tournament name for to load ?")
+        return answer

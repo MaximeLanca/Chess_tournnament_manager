@@ -2,6 +2,7 @@ from controllers.tournament_controller import TournamentController
 from views.menu import Menu
 
 
+# TODO:
 def main():
     while True:
         try:
@@ -13,7 +14,6 @@ def main():
             elif user_answer == 2:
                 tournament = TournamentController()
                 tournament.load_tournament()
-                break
 
             elif user_answer == 4:
                 print("You have stopped the tournament manager.\nGood bye")

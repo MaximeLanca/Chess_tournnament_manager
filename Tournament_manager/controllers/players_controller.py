@@ -22,15 +22,9 @@ class PlayersController:
                 birthday=player_infos[1],
                 chess_national_id=player_infos[2],
             )
-            self.saved_data_players.append({"Number of player": number,
-                                            "Name": player_infos[0],
-                                            "Birthday": player_infos[1],
-                                            "Chess_national_id": player_infos[2]}
-                                           )
+            self.player.save_players_db()
             Interface.display_created_player(number)
             self.players_list.append(self.player)
-
-        return self.saved_data_players
 
     def get_db_data_players(self):
         db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
@@ -60,6 +54,7 @@ class PlayersController:
             birthday="1987-02-08",
             chess_national_id=12345,
         )
+
         player_2 = Player(
             number_of_player=2,
             name="Damien",
@@ -84,11 +79,6 @@ class PlayersController:
         list_ = [player_1, player_2, player_3, player_4]
         for player in list_:
             self.player = player
+            self.player.save_players_db()
             self.players_list.append(self.player)
-
-            self.saved_data_players.append({"Number of player": player.number_of_player,
-                                            "Name": player.name,
-                                            "Birthday": player.birthday,
-                                            "Chess_national_id": player.chess_national_id
-                                            })
         return self.players_list

@@ -1,0 +1,19 @@
+{
+  "_default": {
+    "1": {
+      "Chess_national_ID_Player_1": 12345,
+      "Chess_national_ID_Player_2": 54321,
+      "Winner": 98765
+    },
+    "2": {
+      "Chess_national_ID_Player_1": 56789,
+      "Chess_national_ID_Player_2": 98765,
+      "Winner": 98765
+    },
+    "3": {
+      "Chess_national_ID_Player_1": 12345,
+      "Chess_national_ID_Player_2": 56789,
+      "Winner": null
+    }
+  }
+}

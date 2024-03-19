@@ -1,0 +1,25 @@
+"""
+in tournament :
+[{ "name" : exempletournament}]
+"round" : [
+            169, 179
+            ]]}
+round.json:
+[{"169" : [
+            1769, 1770
+ {"179" : [
+            1771 , 1772
+            ]}
+
+matches.json:
+{
+    "1769" : {
+            "player_1" :  AZ456
+            "player_2" :  GF097
+            "winner" : AZ456
+            }
+    "1770" : {
+            "player_1" :  GF097
+            "player_2" :  PM897
+            "winner" : PM897
+"""

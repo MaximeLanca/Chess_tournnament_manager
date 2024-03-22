@@ -2,7 +2,7 @@ from controllers.tournament_controller import TournamentController
 from views.menu import Menu
 
 
-# TODO:
+# TODO : refaire la couleur des objets
 def main():
     while True:
         try:

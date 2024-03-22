@@ -3,28 +3,28 @@ from tinydb import TinyDB, Query
 
 class Tournament:
 
-    def __init__(self, tournament_name, tournament_location, start_date, end_date, number_of_round, players_list,
+    def __init__(self, tournament_name, tournament_location, start_date, end_date, number_of_round, players_id,
                  rounds=None):
         self.tournament_name = tournament_name
         self.tournament_location = tournament_location
         self.start_date = start_date
         self.end_date = end_date
         self.number_of_round = number_of_round
-        self.players_list = players_list
+        self.players_id = players_id
         self.rounds = rounds or None
 
-    def save_tournament_db(self, matches=None):
+    def save_tournament_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
-        db.insert(self.to_dict(matches))
+        db.insert(self.to_dict())
 
-    def to_dict(self, matches=None):
+    def to_dict(self):
         return {"Tournament_name": self.tournament_name,
                 "Tournament_location": self.tournament_location,
                 "Start_date": self.start_date,
                 "End_date": self.end_date,
                 "Number_of_round": self.number_of_round,
+                "Players_ID": self.players_id,
                 "Round_number": None,
-                "Matches": matches or None
                 }
 
     @classmethod
@@ -34,7 +34,6 @@ class Tournament:
                    data["Start"],
                    data["End"],
                    data["Number_of_round"],
-                   data["Data_players"],
+                   data["Players_ID"],
                    data["Round_number"],
-                   data["Matches"]
                    )

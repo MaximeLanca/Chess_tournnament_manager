@@ -40,40 +40,34 @@ class PlayersController:
 
         return self.players_list
 
-    # def update_players_score(self, pairs_of_players):
-    #     db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
-    #     info = Query()
-    #     for player in pairs_of_players:
-    #         db_players.update({"Score": player.score}, info["Chess national ID"] == player.chess_national_id)
-
     def quick_do_players_list(self):
 
         player_1 = Player(
             number_of_player=1,
             name="Maxime",
             birthday="1987-02-08",
-            chess_national_id=12345,
+            chess_national_id="JH345",
         )
 
         player_2 = Player(
             number_of_player=2,
             name="Damien",
             birthday="1989-05-02",
-            chess_national_id=54321,
+            chess_national_id="OI321",
         )
 
         player_3 = Player(
             number_of_player=3,
             name="Marc",
             birthday="1980-09-01",
-            chess_national_id=56789,
+            chess_national_id="DR789",
         )
 
         player_4 = Player(
             number_of_player=4,
             name="Augustin",
             birthday="1995-09-27",
-            chess_national_id=98765,
+            chess_national_id="TR765",
         )
 
         list_ = [player_1, player_2, player_3, player_4]

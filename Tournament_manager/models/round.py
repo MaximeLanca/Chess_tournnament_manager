@@ -16,12 +16,12 @@ class Round:
 
     def to_dict(self):
         return {"Round": self.round_number,
-                "Matches_list": self.matches_list
+                "Matches": self.matches_list
                 }
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["Matches_list"])
+        return cls(data["Matches"])
 
     def save_matches_list(self):
         db = TinyDB("../Tournament_manager/data/tournaments/matches.json")

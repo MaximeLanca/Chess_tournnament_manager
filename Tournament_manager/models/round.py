@@ -23,7 +23,8 @@ class Round:
     def from_dict(cls, data):
         return cls(data["Matches"])
 
-    def save_matches_list(self):
-        db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
-        matches = db.all()[-1]
-        matches_list = [matches.doc_id]
+# def save_matches_list(self):
+#    db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
+#    matches = db.all()[-1]
+#    matches_list = [matches.doc_id]
+#

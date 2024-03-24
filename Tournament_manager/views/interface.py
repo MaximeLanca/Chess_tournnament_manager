@@ -58,6 +58,20 @@ class Interface:
         player_infos = []
         while True:
             try:
+                national_id = str(input("Enter player national_id ( format AB123) :"))
+                regex_pattern = r'^[A-Za-z]{2}\d{3}$'
+                national_id_result = re.findall(regex_pattern, national_id)
+
+                if national_id_result:
+                    player_infos.append(national_id)
+                    break
+                else:
+                    print(Fore.RED + 'No id specified')
+            except ValueError:
+                print(Fore.RED + "Entry is not valid. Please enter digital entry for the player national_id")
+
+        while True:
+            try:
                 name = input("Enter player name :").lower()
                 player_infos.append(name)
                 break
@@ -76,19 +90,6 @@ class Interface:
             except ValueError:
                 print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
         # TODO : Vérication d'un players national ID unique
-        while True:
-            try:
-                national_id = str(input("Enter player national_id ( format AB123) :"))
-                regex_pattern = r'^[A-Za-z]{2}\d{3}$'
-                national_id_result = re.findall(regex_pattern, national_id)
-
-                if national_id_result:
-                    player_infos.append(national_id)
-                    break
-                else:
-                    print(Fore.RED + 'No id specified')
-            except ValueError:
-                print(Fore.RED + "Entry is not valid. Please enter digital entry for the player national_id")
         return player_infos
 
     @staticmethod
@@ -177,3 +178,13 @@ class Interface:
         """ask tournament to load in DB"""
         answer = input("What is the tournament name for to load ?")
         return answer
+
+    @staticmethod
+    def ask_to_load_player():
+        while True:
+            try:
+                answer = input("This player has already been referenced in a tournament\nDo you want use this "
+                               "profile? (y/n)")
+                return answer
+            except TypeError:
+                print("Your answer isn't valid. Please try again.")

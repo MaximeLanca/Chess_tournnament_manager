@@ -18,10 +18,10 @@ class Player:
         db.insert(self.to_dict())
 
     def to_dict(self):
-        return {"Number of player": self.number_of_player,
+        return {"Number_of_player": self.number_of_player,
                 "Name": self.name,
                 "Birthday": self.birthday,
-                "Chess national ID": self.chess_national_id,
+                "Chess_national_ID": self.chess_national_id,
                 }
 
     @classmethod

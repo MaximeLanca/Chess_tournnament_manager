@@ -12,6 +12,8 @@ class Tournament:
         self.number_of_round = number_of_round
         self.players_id = players_id
         self.rounds = rounds or None
+        self.round_history = []
+        self.match_history = []
 
     def save_tournament_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
@@ -24,7 +26,8 @@ class Tournament:
                 "End_date": self.end_date,
                 "Number_of_round": self.number_of_round,
                 "Players_ID": self.players_id,
-                "Round_number": None,
+                "Round_history": self.round_history,
+                "Match_history": self.match_history
                 }
 
     @classmethod
@@ -35,5 +38,6 @@ class Tournament:
                    data["End"],
                    data["Number_of_round"],
                    data["Players_ID"],
-                   data["Round_number"],
+                   data["Round_history"],
+                   data["Match_history"]
                    )

@@ -16,13 +16,23 @@ class PlayersController:
         """Players and lists creation """
         for number in range(1, (self.number_of_players + 1)):
             player_infos = Interface.ask_player_infos()
-            self.player = Player(
-                number_of_player=number,
-                name=player_infos[0],
-                birthday=player_infos[1],
-                chess_national_id=player_infos[2],
-            )
-            self.player.save_players_db()
+            player_replay = self.check_chess_national_id_in_db(player_infos[2])
+            if player_replay:
+                self.player = Player(
+                    chess_national_id=player_replay["Chess national ID"],
+                    number_of_player=player_replay["Number of player"],
+                    name=player_replay["Name"],
+                    birthday=player_replay["Birthday"],
+                )
+            else:
+                self.player = Player(
+                    number_of_player=number,
+                    name=player_infos[0],
+                    birthday=player_infos[1],
+                    chess_national_id=player_infos[2],
+                )
+                self.player.save_players_db()
+
             Interface.display_created_player(number)
             self.players_list.append(self.player)
 
@@ -39,6 +49,19 @@ class PlayersController:
             self.players_list.append(self.player)
 
         return self.players_list
+
+    # TODO : def à finaliser
+    def check_chess_national_id_in_db(self, player_chess_national_id) -> dict:
+        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        query = Query()
+        searched_player = db.seach(query.Chess_national_ID == player_chess_national_id)
+
+        if searched_player:
+            answer = Interface.ask_to_load_player()
+            if answer == "y":
+                return searched_player
+            else:
+                print("The player has not been loaded in this tournament.Enter another ID")
 
     def quick_do_players_list(self):
 

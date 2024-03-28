@@ -33,10 +33,13 @@ class Match:
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["Chess_national_ID_Player_1"],
-                   data["Chess_national_ID_Player_2"],
-                   data["Winner"]
-                   )
+        db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
+        loaded_match = db.search((Query().Chess_national_ID_Player_1 == data["Chess_national_ID_Player_1"]) &
+                                 (Query().Chess_national_ID_Player_2 == data["Chess_national_ID_Player_2"]) &
+                                 (Query().Winner == data["Winner"]))
+
+        return cls(loaded_match[0]["Chess_national_ID_Player_1"], loaded_match[1]["Chess_national_ID_Player_2"],
+                   loaded_match[3]["Winner"])
 
     def update_result_match(self, winner):
         db = TinyDB("../Tournament_manager/data/tournaments/matches.json")

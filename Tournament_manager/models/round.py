@@ -1,4 +1,4 @@
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
 
 
 class Round:
@@ -20,11 +20,16 @@ class Round:
                 }
 
     @classmethod
-    def from_dict(cls, data):
-        return cls(data["Matches"])
+    def from_dict(cls, id):
+        db = TinyDB("../Tournament_manager/data/tournaments/round.json")
+        loaded_round = db.get(doc_id=id)
+        return cls(loaded_round["Round"],
+                   loaded_round["Matches"]
+                   )
 
-# def save_matches_list(self):
-#    db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
-#    matches = db.all()[-1]
-#    matches_list = [matches.doc_id]
-#
+    @classmethod
+    def get_data_round_db(cls):
+        db = TinyDB("../Tournament_manager/data/tournaments/round.json")
+        last_round = db.all()[-1]
+        round_id = [last_round.doc_id]
+        return round_id

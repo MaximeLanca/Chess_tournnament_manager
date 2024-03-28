@@ -23,3 +23,39 @@ matches.json:
             "player_2" :  PM897
             "winner" : PM897
 """
+
+
+from tinydb import TinyDB, Query
+
+class Match:
+    def __init__(self, player1_id, player2_id, winner):
+        self.player1_id = player1_id
+        self.player2_id = player2_id
+        self.winner = winner
+
+    @classmethod
+    def from_dict(cls, data):
+
+        # Ouvrir la base de données
+
+        db = TinyDB('db.json')
+        matches_table = db.table('matches')  # Supposons que la table s'appelle 'matches'
+
+        # Récupérer les données de la base de données qui correspondent à data
+
+        matches_data = matches_table.search((Query().Chess_national_ID_Player_1 == data["Chess_national_ID_Player_1"]) &
+                                            (Query().Chess_national_ID_Player_2 == data["Chess_national_ID_Player_2"]) &
+                                            (Query().Winner == data["Winner"]))
+
+        # Fermer la base de données (optionnel, mais recommandé)
+        db.close()
+
+        # Créer une instance de la classe Match avec les données récupérées
+        return cls(matches_data[0]["Chess_national_ID_Player_1"],
+                   matches_data[0]["Chess_national_ID_Player_2"],
+                   matches_data[0]["Winner"])
+
+# Utilisation de la méthode de classe pour charger les données
+match = Match.from_dict({"Chess_national_ID_Player_1": "ID1",
+                         "Chess_national_ID_Player_2": "ID2",
+                         "Winner": "ID1"})

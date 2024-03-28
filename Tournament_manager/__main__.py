@@ -8,12 +8,12 @@ def main():
         try:
             user_answer = Menu.menu()
             if user_answer == 1:
-                tournament = TournamentController()
-                tournament.run()
+                start_tournament = TournamentController()
+                start_tournament.run()
 
             elif user_answer == 2:
-                tournament = TournamentController()
-                tournament.load_tournament()
+                loaded_tournament = TournamentController()
+                loaded_tournament.load_tournament()
 
             elif user_answer == 4:
                 print("You have stopped the tournament manager.\nGood bye")
@@ -25,7 +25,6 @@ def main():
 
             else:
                 print("We didn't detect any entry input.\n")
-                exit()
 
         except ValueError:
             print("Error input")

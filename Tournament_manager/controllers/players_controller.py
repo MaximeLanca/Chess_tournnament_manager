@@ -36,16 +36,19 @@ class PlayersController:
             Interface.display_created_player(number)
             self.players_list.append(self.player)
 
-    def get_db_data_players(self):
-        db_players = TinyDB("../Tournament_manager/data/tournaments/player.json")
-        loaded_players = db_players.all()
+    def get_db_data_players(self, players_id: list):
+        query = Query()
+        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
 
-        for data in loaded_players:
-            self.player = Player(number_of_player=data["Number of player"],
-                                 name=data["Name"],
-                                 birthday=data["Birthday"],
-                                 chess_national_id=data["Chess national ID"],
-                                 score=data["Score"])
+        for id in players_id:
+            data = db.search(query.Chess_national_ID == id)
+            data_player = data[0]
+            self.player = Player(
+                chess_national_id=data_player["Chess_national_ID"],
+                number_of_player=data_player["Number_of_player"],
+                name=data_player["Name"],
+                birthday=data_player["Birthday"]
+            )
             self.players_list.append(self.player)
 
         return self.players_list
@@ -55,11 +58,12 @@ class PlayersController:
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
         query = Query()
         searched_player = db.seach(query.Chess_national_ID == player_chess_national_id)
-
         if searched_player:
             answer = Interface.ask_to_load_player()
+
             if answer == "y":
                 return searched_player
+
             else:
                 print("The player has not been loaded in this tournament.Enter another ID")
 

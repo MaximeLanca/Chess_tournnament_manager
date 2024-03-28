@@ -188,3 +188,8 @@ class Interface:
                 return answer
             except TypeError:
                 print("Your answer isn't valid. Please try again.")
+
+    @staticmethod
+    def report_tournament_error(tournament_name):
+        return input(f"They're not tournament with the name '{tournament_name}'.\n"
+                     "Tape 't' for search an other tournament name or tape 'e' for quit the program) (t/e): ")

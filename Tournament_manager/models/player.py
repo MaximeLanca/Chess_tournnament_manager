@@ -1,4 +1,4 @@
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
 
 
 class Player:
@@ -22,12 +22,19 @@ class Player:
                 "Name": self.name,
                 "Birthday": self.birthday,
                 "Chess_national_ID": self.chess_national_id,
+                "Score": self.score
                 }
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["Number of player"],
-                   data["Name"],
-                   data["Birthday"],
-                   data["Chess national ID"],
+        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        loaded_players = db.search((Query().Chess_national_ID == data["Chess_national_ID"]))
+        return cls(loaded_players[0]["Number_of_player"],
+                   loaded_players[1]["Name"],
+                   loaded_players[3]["Chess_national_ID"],
+                   loaded_players[4]["Score"]
                    )
+
+    def update_players_score(self):
+        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        db.update({"Score": self.score})

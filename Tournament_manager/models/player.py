@@ -30,9 +30,9 @@ class Player:
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
         loaded_players = db.search((Query().Chess_national_ID == data["Chess_national_ID"]))
         return cls(loaded_players[0]["Number_of_player"],
-                   loaded_players[1]["Name"],
-                   loaded_players[3]["Chess_national_ID"],
-                   loaded_players[4]["Score"]
+                   loaded_players[0]["Name"],
+                   loaded_players[0]["Chess_national_ID"],
+                   loaded_players[0]["Score"]
                    )
 
     def update_players_score(self):

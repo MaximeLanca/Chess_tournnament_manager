@@ -24,16 +24,16 @@ class Interface:
     @staticmethod
     def introduction():
         """Game introduction"""
-        print(Fore.BLUE + "Welcome to the local chess tournament !\nThe tournament will feature a minimum of four "
-                          "players and a maximum of ten.\nEach game will be played with a maximum of 100 moves.\nThe "
-                          "winner of one match will play with the winner of another match"
-                          "\n"
-                          "\n")
+        print("Welcome to the local chess tournament !\nThe tournament will feature a minimum of four "
+              "players and a maximum of ten.\nEach game will be played with a maximum of 100 moves.\nThe "
+              "winner of one match will play with the winner of another match"
+              "\n"
+              "\n")
 
     @staticmethod
     def second_introduction():
         """Game introduction"""
-        print(Fore.BLUE + "Speed run")
+        print("Speed run")
 
     @staticmethod
     def ask_number_of_players() -> int:
@@ -46,7 +46,7 @@ class Interface:
                     return number_of_players
                 else:
                     number_of_players = 4
-                    print(Fore.BLUE + "The standard number of rounds has been defined.")
+                    print("The standard number of rounds has been defined.")
                     return number_of_players
 
             except ValueError:
@@ -76,7 +76,7 @@ class Interface:
                 player_infos.append(name)
                 break
             except NameError:
-                print(Fore.RED + "Entry is not valid")
+                print("Entry is not valid")
 
         while True:
             try:
@@ -89,13 +89,13 @@ class Interface:
                     print(Fore.RED + 'No birthday specified')
             except ValueError:
                 print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
-        # TODO : Vérication d'un players national ID unique
         return player_infos
 
     @staticmethod
     def display_match(match):
         """player's match"""
-        print(Fore.GREEN + f"Player {match.player_1.number_of_player} VS Player {match.player_2.number_of_player}")
+        print(
+            f" Player{Fore.BLUE} {match.player_1.number_of_player}{Style.RESET_ALL} VS Player {Fore.BLUE}{match.player_2.number_of_player}")
 
     @staticmethod
     def ask_match_winner():
@@ -148,30 +148,30 @@ class Interface:
     @staticmethod
     def display_round(nb):
         """display round number"""
-        print(Fore.GREEN + f"Round #{nb} start !")
+        print(f"Round{Fore.GREEN} #{nb}{Style.RESET_ALL} start !")
 
     @staticmethod
     def display_created_player(number):
         """display new player"""
-        print(Fore.BLUE + f"The player {number} has been created.")
+        print(f"The {Fore.BLUE}player {number}{Style.RESET_ALL} has been created.")
 
     @staticmethod
     def started_tournament(tournament_name):
         """introduces the tournament name"""
-        print(Fore.GREEN + f"The {tournament_name} tournament starts now ! ")
+        print(f"The {Fore.GREEN}{tournament_name}{Style.RESET_ALL} tournament starts now ! ")
 
     @staticmethod
     def players_ranking(tournament_name, players_list):
         """display players ranking"""
-        print(f"Here are the player ranking for the {tournament_name} tournament"
+        print(f"Here are the player ranking for the{Fore.GREEN} {tournament_name}{Style.RESET_ALL} tournament"
               "\n"
               "\n"
               "\n")
         for player in players_list:
-            print(Back.MAGENTA + "----------------------------------------------------------------")
+            print("----------------------------------------------------------------")
             print(
-                Back.MAGENTA + f"Player {player.number_of_player} | Name:{player.name} | Score: {player.score} points")
-            print(Back.MAGENTA + "----------------------------------------------------------------")
+                f"Player{Fore.BLUE} {player.number_of_player}{Style.RESET_ALL} | Name:{Fore.BLUE}{player.name}{Style.RESET_ALL} | Score:{Fore.CYAN} {player.score} points{Style.RESET_ALL}")
+            print("----------------------------------------------------------------")
 
     @staticmethod
     def ask_tournament_for_to_load():

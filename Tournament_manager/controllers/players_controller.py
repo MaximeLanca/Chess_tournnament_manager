@@ -37,27 +37,15 @@ class PlayersController:
             self.players_list.append(self.player)
 
     def get_db_data_players(self, players_id: list):
-        query = Query()
-        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
-
-        for id in players_id:
-            data = db.search(query.Chess_national_ID == id)
-            data_player = data[0]
-            self.player = Player(
-                chess_national_id=data_player["Chess_national_ID"],
-                number_of_player=data_player["Number_of_player"],
-                name=data_player["Name"],
-                birthday=data_player["Birthday"]
-            )
+        for id_ in players_id:
+            self.player = Player.from_dict(id_)
             self.players_list.append(self.player)
-
         return self.players_list
 
     # TODO : def à finaliser
     def check_chess_national_id_in_db(self, player_chess_national_id) -> dict:
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
-        query = Query()
-        searched_player = db.seach(query.Chess_national_ID == player_chess_national_id)
+        searched_player = db.search(Query().Chess_national_ID == player_chess_national_id)
         if searched_player:
             answer = Interface.ask_to_load_player()
 
@@ -68,7 +56,8 @@ class PlayersController:
                 print("The player has not been loaded in this tournament.Enter another ID")
 
     def quick_do_players_list(self):
-
+        # answer= input("New players (np) or players in db (db)?")
+        # if answer == "np":
         player_1 = Player(
             number_of_player=1,
             name="Maxime",
@@ -96,7 +85,6 @@ class PlayersController:
             birthday="1995-09-27",
             chess_national_id="TR765",
         )
-
         list_ = [player_1, player_2, player_3, player_4]
         for player in list_:
             self.player = player

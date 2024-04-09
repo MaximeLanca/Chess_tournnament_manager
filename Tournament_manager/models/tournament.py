@@ -25,18 +25,34 @@ class Tournament:
                 "End_date": self.end_date,
                 "Number_of_round": self.number_of_round,
                 "Players_ID": self.players_id,
-                "Round_history": self.round_history,
+                "Round_history": self.round_history
                 }
 
     @classmethod
-    def from_dict(cls, tournament_name):
+    def from_dict(cls, tournament_name: str):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
         loaded_tournament = db.search((Query().Tournament_name == tournament_name))
         return cls(loaded_tournament[0]["Tournament_name"],
-                   loaded_tournament[1]["Tournament_location"],
-                   loaded_tournament[2]["Start_date"],
-                   loaded_tournament[3]["End_date"],
-                   loaded_tournament[4]["Number_of_round"],
-                   loaded_tournament[5]["Players_ID"],
-                   loaded_tournament[6]["Round_history"],
+                   loaded_tournament[0]["Tournament_location"],
+                   loaded_tournament[0]["Start_date"],
+                   loaded_tournament[0]["End_date"],
+                   loaded_tournament[0]["Number_of_round"],
+                   loaded_tournament[0]["Players_ID"],
+                   loaded_tournament[0]["Round_history"],
                    )
+
+    def update_tournament(self):
+        db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
+        last_tournament = db.all()[-1]
+        id_tournament = [last_tournament.doc_id]
+        db.update({"Number_of_round": self.number_of_round}, doc_ids=id_tournament)
+        db.update({"Round_history": self.round_history}, doc_ids=id_tournament)
+
+    @classmethod
+    def search_tournament(cls, tournament_name: str) -> bool:
+        db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
+        searched_tournament = db.search(Query().Tournament_name == tournament_name)
+        if searched_tournament:
+            return True
+        else:
+            return False

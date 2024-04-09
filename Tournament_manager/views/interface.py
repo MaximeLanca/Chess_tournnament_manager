@@ -193,3 +193,7 @@ class Interface:
     def report_tournament_error(tournament_name):
         return input(f"They're not tournament with the name '{tournament_name}'.\n"
                      "Tape 't' for search an other tournament name or tape 'e' for quit the program) (t/e): ")
+
+    @staticmethod
+    def stop_the_game():
+        print("All players have met during tournament.\nThe tournament is over.")

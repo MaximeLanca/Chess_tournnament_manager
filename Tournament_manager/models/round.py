@@ -3,10 +3,10 @@ from tinydb import TinyDB, Query
 
 class Round:
 
-    def __init__(self, round_number, matches, matches_list, round_list):
+    def __init__(self, round_number, matches_list, matches, round_list):
         self.round_number = round_number
-        self.matches = None or matches
         self.id_matches_list = [] or matches_list
+        self.matches = None or matches
         self.round_list = None or round_list
         self.id_last_round = []
 
@@ -17,15 +17,15 @@ class Round:
 
     def to_dict(self):
         return {"Round": self.round_number,
-                "Matches": self.id_matches_list
+                "ID_matches_list": self.id_matches_list,
                 }
 
     @classmethod
-    def from_dict(cls, id_):
+    def from_db(cls, ids_):
         db = TinyDB("../Tournament_manager/data/tournaments/round.json")
-        loaded_round = db.get(doc_id=id_[0])
+        loaded_round = db.get(doc_id=ids_)
         return cls(loaded_round["Round"],
-                   loaded_round["Matches"],
+                   loaded_round["ID_matches_list"],
                    None,
                    None
                    )

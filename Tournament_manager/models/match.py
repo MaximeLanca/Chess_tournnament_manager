@@ -12,17 +12,18 @@ class Match:
         if result == 1:
             self.player_1.score += 1
             self.winner = self.player_1.chess_national_id
-            self.update_result_match()
+            # self.update_result_match()
 
         elif result == 2:
             self.player_2.score += 1
             self.winner = self.player_2.chess_national_id
-            self.update_result_match()
+            # self.update_result_match()
 
         else:
             self.player_1.score += 0.5
             self.player_2.score += 0.5
             self.winner = "Equality"
+            # self.update_result_match()
 
     def save_match_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
@@ -35,7 +36,7 @@ class Match:
                 }
 
     @classmethod
-    def from_dict(cls, id_):
+    def from_db(cls, id_):
         db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
         loaded_match = db.get(doc_id=id_)
         return cls(loaded_match["Chess_national_ID_Player_1"],
@@ -44,7 +45,9 @@ class Match:
 
     def update_result_match(self):
         db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
-        db.update({"Winner": self.winner})
+        last_match = db.all()[-1]
+        match_id = last_match.doc_id
+        db.update({"Winner": self.winner}, doc_ids=match_id)
 
     @classmethod
     def get_data_matches_db(cls) -> list:

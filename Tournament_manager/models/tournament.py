@@ -13,6 +13,7 @@ class Tournament:
         self.players_id = players_id or None
         self.rounds = rounds or None
         self.round_history = round_history or []
+        self.matches_history = []
 
     def save_tournament_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
@@ -25,11 +26,12 @@ class Tournament:
                 "End_date": self.end_date,
                 "Number_of_round": self.number_of_round,
                 "Players_ID": self.players_id,
+                "Rounds": self.rounds,
                 "Round_history": self.round_history
                 }
 
     @classmethod
-    def from_dict(cls, tournament_name: str):
+    def from_db(cls, tournament_name: str):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
         loaded_tournament = db.search((Query().Tournament_name == tournament_name))
         return cls(loaded_tournament[0]["Tournament_name"],
@@ -38,6 +40,7 @@ class Tournament:
                    loaded_tournament[0]["End_date"],
                    loaded_tournament[0]["Number_of_round"],
                    loaded_tournament[0]["Players_ID"],
+                   loaded_tournament[0]["Rounds"],
                    loaded_tournament[0]["Round_history"],
                    )
 

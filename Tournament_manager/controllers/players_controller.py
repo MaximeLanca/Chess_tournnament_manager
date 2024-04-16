@@ -38,14 +38,13 @@ class PlayersController:
 
     def get_db_data_players(self, players_id: list):
         for id_ in players_id:
-            self.player = Player.from_dict(id_)
+            self.player = Player.from_db(id_)
             self.players_list.append(self.player)
         return self.players_list
 
     # TODO : def à finaliser
     def check_chess_national_id_in_db(self, player_chess_national_id) -> dict:
-        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
-        searched_player = db.search(Query().Chess_national_ID == player_chess_national_id)
+        searched_player = Player.search_player(player_chess_national_id)
         if searched_player:
             answer = Interface.ask_to_load_player()
 

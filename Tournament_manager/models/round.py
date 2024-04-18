@@ -35,8 +35,9 @@ class Round:
         last_round = db.all()[-1]
         self.id_last_round.append(last_round.doc_id)
 
-    @classmethod
-    def delete_round(cls):
+    def update_round(self):
         db = TinyDB("../Tournament_manager/data/tournaments/round.json")
         last_round = db.all()[-1]
-        db.remove(doc_ids=[last_round.doc_id])
+        id_round = [last_round.doc_id]
+        db.update({"Round": self.round_number}, doc_ids=id_round)
+        db.update({"ID_matches_list": self.id_matches_list}, doc_ids=id_round)

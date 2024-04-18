@@ -4,7 +4,7 @@ from tinydb import TinyDB, Query
 class Tournament:
 
     def __init__(self, tournament_name, tournament_location, start_date, end_date, number_of_round, players_id=None,
-                 rounds=None):
+                 rounds=None, round_history=None):
         self.tournament_name = tournament_name
         self.tournament_location = tournament_location
         self.start_date = start_date
@@ -12,7 +12,7 @@ class Tournament:
         self.number_of_round = number_of_round
         self.players_id = players_id or None
         self.rounds = rounds or None
-        self.round_history = []
+        self.round_history = [] or round_history
         self.matches_history = []
 
     def save_tournament_db(self):

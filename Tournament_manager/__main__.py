@@ -35,9 +35,6 @@ if __name__ == "__main__":
 
 main()
 
-# TODO Projet 4] Il faut itérer sur tous les matchs de tous les rounds
-# TODO[Projet 4] Tous les matchs du dernier round doivent être associé au current_round, pas juste le match non terminé
-# TODO[Projet 4] Debugger jusqu'au bout pour pouvoir charger
 # TODO[Projet 4] Bug : seul le message d'erreur doit être affiché en rouge
 # TODO[Projet 4] "Stop the tournament" ne devrait pas quitter le programme mais revenir au menu initial
 # TODO[Projet 4] Commencer la génération de rapports

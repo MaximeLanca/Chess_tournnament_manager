@@ -67,6 +67,7 @@ class PlayersController:
             birthday="1987-02-08",
             chess_national_id="JH345",
         )
+        self.check_chess_national_id_in_db(player_1.chess_national_id)
 
         player_2 = Player(
             number_of_player=2,
@@ -74,6 +75,7 @@ class PlayersController:
             birthday="1989-05-02",
             chess_national_id="OI321",
         )
+        self.check_chess_national_id_in_db(player_2.chess_national_id)
 
         player_3 = Player(
             number_of_player=3,
@@ -81,6 +83,7 @@ class PlayersController:
             birthday="1980-09-01",
             chess_national_id="DR789",
         )
+        self.check_chess_national_id_in_db(player_3.chess_national_id)
 
         player_4 = Player(
             number_of_player=4,
@@ -88,6 +91,7 @@ class PlayersController:
             birthday="1995-09-27",
             chess_national_id="TR765",
         )
+        self.check_chess_national_id_in_db(player_4.chess_national_id)
         list_ = [player_1, player_2, player_3, player_4]
         for player in list_:
             self.player = player

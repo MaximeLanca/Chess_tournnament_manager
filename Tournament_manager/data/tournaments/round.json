@@ -1,1 +1,31 @@
-{"_default": {"1": {"Round": 1, "ID_matches_list": [[1], [2]]}, "2": {"Round": 1, "ID_matches_list": [[3]]}, "3": {"Round": 2, "ID_matches_list": [[4], [5]]}}}
+{
+  "_default": {
+    "1": {
+      "Round": 1,
+      "ID_matches_list": [
+        1,
+        2
+      ]
+    },
+    "2": {
+      "Round": 1,
+      "ID_matches_list": [
+        3,
+        4
+      ]
+    },
+    "3": {
+      "Round": 1,
+      "ID_matches_list": [
+        5
+      ]
+    },
+    "4": {
+      "Round": 2,
+      "ID_matches_list": [
+        6,
+        7
+      ]
+    }
+  }
+}

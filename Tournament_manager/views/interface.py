@@ -19,7 +19,8 @@ class Interface:
                                             ))
                 return ask_information
         except ValueError:
-            print(Fore.RED + "You are trying to enter an invalid value.\nTap ( 1 ) or ( 2 ) or (3).")
+            print(
+                f"{Fore.RED} + You are trying to enter an invalid value.\nTap ( 1 ) or ( 2 ) or (3).{Style.RESET_ALL}")
 
     @staticmethod
     def introduction():
@@ -42,7 +43,7 @@ class Interface:
             try:
                 number_of_players = int(input("Enter a number of player between 4 and 10 and an evan number :"))
                 if number_of_players % 2 == 0 and 4 <= number_of_players:
-                    print(Fore.BLUE + f"{number_of_players} players take part in the tournament.")
+                    print(f"{Fore.BLUE}{number_of_players} players take part in the tournament.{Style.RESET_ALL}")
                     return number_of_players
                 else:
                     number_of_players = 4
@@ -66,9 +67,10 @@ class Interface:
                     player_infos.append(national_id)
                     break
                 else:
-                    print(Fore.RED + 'No id specified')
+                    print(f'{Fore.RED} No id specified{Style.RESET_ALL}')
             except ValueError:
-                print(Fore.RED + "Entry is not valid. Please enter digital entry for the player national_id")
+                print(f'{Fore.RED}'
+                      f'Entry is not valid. Please enter digital entry for the player national_id{Style.RESET_ALL}')
 
         while True:
             try:
@@ -86,16 +88,16 @@ class Interface:
                     player_infos.append(birthday_date)
                     break
                 else:
-                    print(Fore.RED + 'No birthday specified')
+                    print(f"{Fore.RED}No birthday specified{Style.RESET_ALL}")
             except ValueError:
-                print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
+                print(f"{Fore.RED}Invalid date format. Please enter date in 'YYYY-MM-DD' format.{Style.RESET_ALL}")
         return player_infos
 
     @staticmethod
     def display_match(match):
         """player's match"""
         print(
-            f" Player{Fore.BLUE} {match.player_1.number_of_player}{Style.RESET_ALL} VS Player {Fore.BLUE}{match.player_2.number_of_player}")
+            f" Player{Fore.BLUE} {match.player_1.number_of_player}{Style.RESET_ALL} VS Player {Fore.BLUE}{match.player_2.number_of_player}{Style.RESET_ALL}")
 
     @staticmethod
     def ask_match_winner():
@@ -132,7 +134,7 @@ class Interface:
                 start_date = datetime.strptime(date_str, "%Y-%m-%d")
                 return start_date
             except ValueError:
-                print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
+                print(f"{Fore.RED} + Invalid date format. Please enter date in 'YYYY-MM-DD' format.{Style.RESET_ALL}")
 
     @staticmethod
     def ask_tournament_end_date():
@@ -143,7 +145,7 @@ class Interface:
                 end_date = datetime.strptime(date_str, "%Y-%m-%d")
                 return end_date
             except ValueError:
-                print(Fore.RED + "Invalid date format. Please enter date in 'YYYY-MM-DD' format.")
+                print(f"{Fore.RED} + Invalid date format. Please enter date in 'YYYY-MM-DD' format.{Style.RESET_ALL}")
 
     @staticmethod
     def display_round(nb):
@@ -164,8 +166,6 @@ class Interface:
     def players_ranking(tournament_name, players_list):
         """display players ranking"""
         print(f"Here are the player ranking for the{Fore.GREEN} {tournament_name}{Style.RESET_ALL} tournament"
-              "\n"
-              "\n"
               "\n")
         for player in players_list:
             print("----------------------------------------------------------------")

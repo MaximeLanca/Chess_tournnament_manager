@@ -39,10 +39,8 @@ class PlayersController:
 
     def get_db_data_players(self, players_id: list) -> list:
         """Load players for a loaded tournament.
-            :param:
-                players_id: Chess national id of players
-            :return:
-                players_list: players list
+            :param: players_id: Chess national id of players
+            :return:players_list: players list
         """
         for id_ in players_id:
             self.player = Player.from_db(id_)

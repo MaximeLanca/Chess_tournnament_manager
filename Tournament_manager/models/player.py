@@ -50,5 +50,4 @@ class Player:
     def search_all_players(cls):
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
         players_in_db = db.all()
-        print(players_in_db)
         return players_in_db

@@ -59,3 +59,9 @@ class Tournament:
             return True
         else:
             return False
+
+    @classmethod
+    def search_all_tournament(cls) -> list:
+        db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
+        tournaments_in_db = db.all()
+        return tournaments_in_db

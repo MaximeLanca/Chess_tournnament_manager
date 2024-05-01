@@ -1,5 +1,6 @@
 from Tournament_manager.controllers import tools
 from Tournament_manager.models.player import Player
+from Tournament_manager.views.interface import Interface
 from controllers.tournament_controller import TournamentController
 from views.menu import Menu
 
@@ -17,6 +18,8 @@ def main():
                 loaded_tournament.load_tournament()
 
             elif user_answer == 3:
+                answer = Interface.ask_report_type()
+
                 tools.create_report_folder()
 
             elif user_answer == 4:

@@ -1,3 +1,5 @@
+from Tournament_manager.controllers import tools
+from Tournament_manager.models.player import Player
 from controllers.tournament_controller import TournamentController
 from views.menu import Menu
 
@@ -14,10 +16,15 @@ def main():
                 loaded_tournament = TournamentController()
                 loaded_tournament.load_tournament()
 
+            elif user_answer == 3:
+                tools.create_report_folder()
+
             elif user_answer == 4:
                 print("You have stopped the tournament manager.\nGood bye")
                 exit()
+
             elif user_answer == 5:
+                Player.search_all_players()
                 tournament = TournamentController()
                 tournament.speed_run()
 

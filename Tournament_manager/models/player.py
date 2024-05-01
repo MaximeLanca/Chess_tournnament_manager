@@ -45,3 +45,10 @@ class Player:
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
         searched_player = db.search(Query().Chess_national_ID == chess_national_id)
         return searched_player
+
+    @classmethod
+    def search_all_players(cls):
+        db = TinyDB("../Tournament_manager/data/tournaments/player.json")
+        players_in_db = db.all()
+        print(players_in_db)
+        return players_in_db

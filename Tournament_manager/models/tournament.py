@@ -52,13 +52,10 @@ class Tournament:
         db.update({"Round_history": self.round_history}, doc_ids=id_tournament)
 
     @classmethod
-    def search_tournament(cls, tournament_name: str) -> bool:
+    def search_tournament(cls, tournament_name: str) -> list:
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
         searched_tournament = db.search(Query().Tournament_name == tournament_name)
-        if searched_tournament:
-            return True
-        else:
-            return False
+        return searched_tournament
 
     @classmethod
     def search_all_tournament(cls) -> list:

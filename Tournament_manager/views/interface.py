@@ -219,3 +219,7 @@ class Interface:
     def send_message_after_extraction_of_db():
         print('--- Successful extraction of db ---')
         print("-----------------------------------------------------")
+
+    @staticmethod
+    def send_message_on_existing_folder_report():
+        print('Folders and files already exist. deliverables will be create in existing folder')

@@ -19,8 +19,7 @@ def main():
 
             elif user_answer == 3:
                 answer = Interface.ask_report_type()
-
-                tools.create_report_folder()
+                TournamentController.handle_request_for_report(answer)
 
             elif user_answer == 4:
                 print("You have stopped the tournament manager.\nGood bye")

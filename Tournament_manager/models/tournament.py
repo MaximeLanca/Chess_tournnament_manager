@@ -12,7 +12,7 @@ class Tournament:
         self.number_of_round = number_of_round
         self.players_id = players_id or None
         self.rounds = rounds or None
-        self.round_history = [] or round_history
+        self.round_history = round_history or []
         self.matches_history = []
 
     def save_tournament_db(self):

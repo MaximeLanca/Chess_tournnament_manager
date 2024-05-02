@@ -7,8 +7,7 @@ class Round:
         self.round_number = round_number
         self.id_matches_list = matches_list or []
         self.matches = matches
-        # = round_list
-        self.last_round_id = []
+        self.last_round_id = None
 
     def save_round_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/round.json")
@@ -32,7 +31,7 @@ class Round:
     def get_data_round_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/round.json")
         last_round = db.all()[-1]
-        self.last_round_id.append(last_round.doc_id)
+        self.last_round_id = last_round.doc_id
 
     def update_round(self):
         db = TinyDB("../Tournament_manager/data/tournaments/round.json")

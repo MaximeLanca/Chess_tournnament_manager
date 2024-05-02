@@ -199,19 +199,19 @@ class Interface:
         print("All players have met during tournament.\nThe tournament is over.")
 
     @staticmethod
-    def ask_report_type():
+    def ask_report_type() -> int:
         try:
             while True:
-                ask_information = int(input("What report type you wish ?\n"
-                                            "Press ( 1 ) for players list\n"
-                                            "Press ( 2 ) for tournament list\n"
-                                            "Press ( 3 ) for to know date and place of a tournament\n"
-                                            "Press ( 4 ) for players list of a requested tournament\n"
-                                            "Press ( 5 ) for all rounds and matches of a tournament\n"
-                                            "\n"
-                                            "\n"
-                                            ))
-                return ask_information
+                answer = int(input("What report type you wish ?\n"
+                                   "Press ( 1 ) for players list\n"
+                                   "Press ( 2 ) for tournament list\n"
+                                   "Press ( 3 ) for to know date and place of a tournament\n"
+                                   "Press ( 4 ) for players list of a requested tournament\n"
+                                   "Press ( 5 ) for all rounds and matches of a tournament\n"
+                                   "\n"
+                                   "\n"
+                                   ))
+                return answer
         except ValueError:
             print("You are trying to enter an invalid value.\nPress ( 1 ) or ( 2 ) or (3).")
 

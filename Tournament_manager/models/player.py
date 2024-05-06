@@ -36,18 +36,18 @@ class Player:
                    loaded_players[0]["Score"]
                    )
 
-    def update_players_score(self):
+    def update_players_score_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
         db.update({"Score": self.score}, Query().Chess_national_ID == self.chess_national_id)
 
     @classmethod
-    def search_player(cls, chess_national_id: str):
+    def search_player_db(cls, chess_national_id: str):
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
         searched_player = db.search(Query().Chess_national_ID == chess_national_id)
         return searched_player
 
     @classmethod
-    def search_all_players(cls):
+    def search_all_players_db(cls):
         db = TinyDB("../Tournament_manager/data/tournaments/player.json")
-        players_in_db = db.all()
-        return players_in_db
+        players_db = db.all()
+        return players_db

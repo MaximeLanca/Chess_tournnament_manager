@@ -1,22 +1,23 @@
 {
   "_default": {
     "1": {
-      "Tournament_name": "Quick tournament1",
-      "Tournament_location": "Paris",
+      "Tournament_name": "Quick tournament2",
+      "Tournament_location": "Barcelone",
       "Start_date": "00-00-0000",
       "End_date": "00-00-0001",
-      "Number_of_round": 2,
+      "Number_of_round": 3,
       "Players_ID": [
         "JH345",
         "OI321",
         "DR789",
         "TR765"
       ],
-      "Rounds": null,
       "Round_history": [
-        1,
-        2
-      ]
+        14,
+        15,
+        16
+      ],
+      "Description": "Welcome to the tournament"
     }
   }
 }

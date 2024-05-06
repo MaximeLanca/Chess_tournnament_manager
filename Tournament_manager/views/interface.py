@@ -100,6 +100,12 @@ class Interface:
             f" Player{Fore.BLUE} {match.player_1.number_of_player}{Style.RESET_ALL} VS Player {Fore.BLUE}{match.player_2.number_of_player}{Style.RESET_ALL}")
 
     @staticmethod
+    def ask_tournament_description():
+        """ask description tournament of director"""
+        desc = input("What description tournament would you enter? :")
+        return desc
+
+    @staticmethod
     def ask_match_winner():
         """match winner"""
         return int(input("Identify the Winner:\n"
@@ -158,7 +164,7 @@ class Interface:
         print(f"The {Fore.BLUE}player {number}{Style.RESET_ALL} has been created.")
 
     @staticmethod
-    def started_tournament(tournament_name):
+    def send_message_for_started_tournament(tournament_name):
         """introduces the tournament name"""
         print(f"The {Fore.GREEN}{tournament_name}{Style.RESET_ALL} tournament starts now ! ")
 
@@ -190,7 +196,7 @@ class Interface:
                 print("Your answer isn't valid. Please try again.")
 
     @staticmethod
-    def report_tournament_error(tournament_name):
+    def send_error_message_on_tournament(tournament_name):
         return input(f"They're not tournament with the name '{tournament_name}'.\n"
                      "Tape 't' for search an other tournament name or tape 'e' for quit the program) (t/e): ")
 

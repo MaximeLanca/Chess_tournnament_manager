@@ -26,7 +26,7 @@ def main():
                 exit()
 
             elif user_answer == 5:
-                Player.search_all_players()
+                Player.search_all_players_db()
                 tournament = TournamentController()
                 tournament.speed_run()
 

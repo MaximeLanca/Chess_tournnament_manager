@@ -43,6 +43,6 @@ class Match:
                    id_
                    )
 
-    def update_result_match(self):
+    def update_result_match_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/matches.json")
         db.update({"Winner": self.winner}, doc_ids=[self.id_])

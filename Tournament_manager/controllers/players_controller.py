@@ -1,5 +1,3 @@
-from tinydb import TinyDB, Query
-
 from Tournament_manager.models.player import Player
 from Tournament_manager.views.interface import Interface
 
@@ -12,11 +10,11 @@ class PlayersController:
         self.player = player or None
         self.saved_data_players = []
 
-    def get_data_players(self):
+    def get_players_information(self):
         """Players and lists creation """
         for number in range(1, (self.number_of_players + 1)):
             player_infos = Interface.ask_player_infos()
-            replayed_player = self.check_chess_national_id_in_db(player_infos[0])
+            replayed_player = self.check_chess_national_id_db(player_infos[0])
             if replayed_player:
                 self.player = Player(
                     chess_national_id=replayed_player["Chess national ID"],
@@ -37,7 +35,7 @@ class PlayersController:
             Interface.display_created_player(number)
             self.players_list.append(self.player)
 
-    def get_db_data_players(self, players_id: list) -> list:
+    def get_players_data_db(self, players_id: list) -> list:
         """Load players for a loaded tournament.
             :param: players_id: Chess national id of players
             :return:players_list: players list
@@ -47,8 +45,8 @@ class PlayersController:
             self.players_list.append(self.player)
         return self.players_list
 
-    def check_chess_national_id_in_db(self, player_chess_national_id) -> dict:
-        searched_player = Player.search_player(player_chess_national_id)
+    def check_chess_national_id_db(self, player_chess_national_id) -> dict:
+        searched_player = Player.search_player_db(player_chess_national_id)
         if searched_player:
             answer = Interface.ask_to_load_player()
 
@@ -65,7 +63,7 @@ class PlayersController:
             birthday="1987-02-08",
             chess_national_id="JH345",
         )
-        self.check_chess_national_id_in_db(player_1.chess_national_id)
+        self.check_chess_national_id_db(player_1.chess_national_id)
 
         player_2 = Player(
             number_of_player=2,
@@ -73,7 +71,7 @@ class PlayersController:
             birthday="1989-05-02",
             chess_national_id="OI321",
         )
-        self.check_chess_national_id_in_db(player_2.chess_national_id)
+        self.check_chess_national_id_db(player_2.chess_national_id)
 
         player_3 = Player(
             number_of_player=3,
@@ -81,7 +79,7 @@ class PlayersController:
             birthday="1980-09-01",
             chess_national_id="DR789",
         )
-        self.check_chess_national_id_in_db(player_3.chess_national_id)
+        self.check_chess_national_id_db(player_3.chess_national_id)
 
         player_4 = Player(
             number_of_player=4,
@@ -89,7 +87,7 @@ class PlayersController:
             birthday="1995-09-27",
             chess_national_id="TR765",
         )
-        self.check_chess_national_id_in_db(player_4.chess_national_id)
+        self.check_chess_national_id_db(player_4.chess_national_id)
         list_ = [player_1, player_2, player_3, player_4]
         for player in list_:
             self.player = player

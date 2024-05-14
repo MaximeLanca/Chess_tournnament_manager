@@ -1,4 +1,4 @@
-from tinydb import TinyDB, Query
+from tinydb import TinyDB
 
 
 class Round:
@@ -12,7 +12,6 @@ class Round:
     def save_round_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/round.json")
         db.insert(self.to_dict())
-        # self.round_list = [saved_round]
 
     def to_dict(self):
         return {"Round": self.round_number,

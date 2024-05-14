@@ -1,6 +1,6 @@
 import re
 from datetime import datetime
-from colorama import Fore, Style, Back
+from colorama import Fore, Style
 
 
 class Interface:
@@ -10,10 +10,10 @@ class Interface:
         try:
             while True:
                 ask_information = int(input("What do you want to do ?\n"
-                                            "Enter ( 1 ) for to create tournament and players\n"
-                                            "Enter ( 2 ) for to load tournament\n"
-                                            "Enter ( 3 ) for to create report\n"
-                                            "Enter ( 4 ) for to stop application\n"
+                                            "Enter ( 1 ) to create tournament and players\n"
+                                            "Enter ( 2 ) to load tournament\n"
+                                            "Enter ( 3 ) to create report\n"
+                                            "Enter ( 4 ) to stop application\n"
                                             "\n"
                                             "\n"
                                             ))
@@ -97,7 +97,8 @@ class Interface:
     def display_match(match):
         """player's match"""
         print(
-            f" Player{Fore.BLUE} {match.player_1.number_of_player}{Style.RESET_ALL} VS Player {Fore.BLUE}{match.player_2.number_of_player}{Style.RESET_ALL}")
+            f"Player{Fore.BLUE} {match.player_1.name}{Style.RESET_ALL} VS Player {Fore.BLUE}{match.player_2.name}"
+            f"{Style.RESET_ALL}")
 
     @staticmethod
     def ask_tournament_description():
@@ -106,14 +107,13 @@ class Interface:
         return desc
 
     @staticmethod
-    def ask_match_winner():
+    def ask_match_winner(match):
         """match winner"""
         return int(input("Identify the Winner:\n"
-                         "For Player 1: Tape 1\n"
-                         "For Player 2: Tape 2\n"
+                         f"For{Fore.BLUE} {match.player_1.name}{Style.RESET_ALL}: Tape 1\n"
+                         f"For{Fore.BLUE} {match.player_2.name}{Style.RESET_ALL}: Tape 2\n"
                          "Equality: Tape 3\n"
                          "Stop the tournament: Tape 4\n"
-                         "Entry:"
                          ))
 
     @staticmethod
@@ -176,7 +176,9 @@ class Interface:
         for player in players_list:
             print("----------------------------------------------------------------")
             print(
-                f"Player{Fore.BLUE} {player.number_of_player}{Style.RESET_ALL} | Name:{Fore.BLUE}{player.name}{Style.RESET_ALL} | Score:{Fore.CYAN} {player.score} points{Style.RESET_ALL}")
+                f"Player:{Fore.BLUE} {player.number_of_player}{Style.RESET_ALL} | "
+                f"Name:{Fore.BLUE}{player.name}{Style.RESET_ALL} | "
+                f"Score:{Fore.CYAN} {player.score} points{Style.RESET_ALL}")
             print("----------------------------------------------------------------")
 
     @staticmethod

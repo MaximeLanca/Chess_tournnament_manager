@@ -54,9 +54,9 @@ class Interface:
                 print(Fore.RED + "Please, enter valid number.")
 
     @staticmethod
-    def ask_player_infos() -> list:
+    def ask_player_infos() -> dict:
         """players data"""
-        player_infos = []
+        player_infos = {}
         while True:
             try:
                 national_id = str(input("Enter player national_id ( format AB123) :"))
@@ -64,7 +64,7 @@ class Interface:
                 national_id_result = re.findall(regex_pattern, national_id)
 
                 if national_id_result:
-                    player_infos.append(national_id)
+                    player_infos['chess_national_id'] = national_id
                     break
                 else:
                     print(f'{Fore.RED} No id specified{Style.RESET_ALL}')
@@ -75,7 +75,7 @@ class Interface:
         while True:
             try:
                 name = input("Enter player name :").lower()
-                player_infos.append(name)
+                player_infos['name'] = name
                 break
             except NameError:
                 print("Entry is not valid")
@@ -85,7 +85,7 @@ class Interface:
                 date_str = input("Please enter the player birthday ( format YYYY-MM-DD ) :")
                 birthday_date = str(datetime.strptime(date_str, "%Y-%m-%d"))
                 if birthday_date:
-                    player_infos.append(birthday_date)
+                    player_infos['birthday'] = birthday_date
                     break
                 else:
                     print(f"{Fore.RED}No birthday specified{Style.RESET_ALL}")
@@ -211,11 +211,11 @@ class Interface:
         try:
             while True:
                 answer = int(input("What report type you wish ?\n"
-                                   "Press ( 1 ) for players list\n"
-                                   "Press ( 2 ) for tournament list\n"
-                                   "Press ( 3 ) for to know date and place of a tournament\n"
-                                   "Press ( 4 ) for players list of a requested tournament\n"
-                                   "Press ( 5 ) for all rounds and matches of a tournament\n"
+                                   "Press ( 1 ) to create players list\n"
+                                   "Press ( 2 ) to create tournament list\n"
+                                   "Press ( 3 ) to know date and place of a tournament\n"
+                                   "Press ( 4 ) to create players list of a requested tournament\n"
+                                   "Press ( 5 ) to create all rounds and matches of a tournament list\n"
                                    "\n"
                                    "\n"
                                    ))

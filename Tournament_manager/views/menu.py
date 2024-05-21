@@ -5,11 +5,11 @@ class Menu:
         try:
             while True:
                 ask_information = int(input("What do you want to do ?\n"
-                                            "Press ( 1 ) for to create tournament and players\n"
-                                            "Press ( 2 ) for to load tournament\n"
-                                            "Press ( 3 ) for to create report\n"
-                                            "Press ( 4 ) for to stop application\n"
-                                            "Press ( 5 ) for to Speed Run\n"
+                                            "Press ( 1 ) to create tournament and players\n"
+                                            "Press ( 2 ) to load tournament\n"
+                                            "Press ( 3 ) to create report\n"
+                                            "Press ( 4 ) to stop application\n"
+                                            "Press ( 5 ) to Speed Run\n"
                                             "\n"
                                             "\n"
                                             ))

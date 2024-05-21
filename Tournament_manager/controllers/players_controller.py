@@ -14,7 +14,7 @@ class PlayersController:
         """Players and lists creation """
         for number in range(1, (self.number_of_players + 1)):
             player_infos = Interface.ask_player_infos()
-            replayed_player = self.check_chess_national_id_db(player_infos[0])
+            replayed_player = self.check_chess_national_id_db(player_infos['chess_national_id'])
             if replayed_player:
                 self.player = Player(
                     chess_national_id=replayed_player["Chess national ID"],
@@ -26,9 +26,9 @@ class PlayersController:
             else:
                 self.player = Player(
                     number_of_player=number,
-                    name=player_infos[0],
-                    birthday=player_infos[1],
-                    chess_national_id=player_infos[2],
+                    name=player_infos['name'],
+                    birthday=player_infos['birthday'],
+                    chess_national_id=player_infos['chess_national_id'],
                 )
                 self.player.save_players_db()
 

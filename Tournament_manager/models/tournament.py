@@ -32,17 +32,34 @@ class Tournament:
 
     @classmethod
     def from_db(cls, tournament_name: str):
+        # db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
+        # loaded_tournament = db.search((Query().Tournament_name == tournament_name))
+        # return cls(loaded_tournament[0]["Tournament_name"],
+        #           loaded_tournament[0]["Tournament_location"],
+        #           loaded_tournament[0]["Start_date"],
+        #           loaded_tournament[0]["End_date"],
+        #           loaded_tournament[0]["Number_of_round"],
+        #           loaded_tournament[0]["Players_ID"],
+        #           loaded_tournament[0]["Round_history"],
+        #           loaded_tournament[0]["Description"]
+        #           )
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")
         loaded_tournament = db.search((Query().Tournament_name == tournament_name))
-        return cls(loaded_tournament[0]["Tournament_name"],
-                   loaded_tournament[0]["Tournament_location"],
-                   loaded_tournament[0]["Start_date"],
-                   loaded_tournament[0]["End_date"],
-                   loaded_tournament[0]["Number_of_round"],
-                   loaded_tournament[0]["Players_ID"],
-                   loaded_tournament[0]["Round_history"],
-                   loaded_tournament[0]["Description"]
-                   )
+        if loaded_tournament:
+            tournament_data = loaded_tournament[0]
+            tournament = cls(tournament_data["Tournament_name"],
+                             tournament_data["Tournament_location"],
+                             tournament_data["Start_date"],
+                             tournament_data["End_date"],
+                             tournament_data["Number_of_round"],
+                             tournament_data["Players_ID"],
+                             tournament_data["Description"]
+                             )
+            tournament.rounds_history = tournament_data["Round_history"]
+            tournament.matches_history = tournament_data.get("Match_history", [])
+            return tournament
+        else:
+            raise ValueError("Tournament not found in database")
 
     def update_tournament_db(self):
         db = TinyDB("../Tournament_manager/data/tournaments/tournament.json")

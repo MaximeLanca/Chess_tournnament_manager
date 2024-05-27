@@ -169,6 +169,11 @@ class Interface:
         print(f"The {Fore.GREEN}{tournament_name}{Style.RESET_ALL} tournament starts now ! ")
 
     @staticmethod
+    def display_tournament_winner(players_list):
+        print(f"The tournament winner is: {Fore.BLUE}{players_list[0].name}{Style.RESET_ALL} with "
+              f"{Fore.CYAN}{players_list[0].score}{Style.RESET_ALL} points")
+
+    @staticmethod
     def players_ranking(tournament_name, players_list):
         """display players ranking"""
         print(f"Here are the player ranking for the{Fore.GREEN} {tournament_name}{Style.RESET_ALL} tournament"

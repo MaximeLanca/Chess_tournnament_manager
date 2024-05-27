@@ -6,7 +6,7 @@ class Round:
     def __init__(self, round_number, matches_list=None, matches=None):
         self.round_number = round_number
         self.matches_id_list = matches_list or []
-        self.matches = matches
+        self.matches = matches or []
         self.last_round_id = None
 
     def save_round_db(self):

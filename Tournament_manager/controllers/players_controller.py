@@ -17,18 +17,18 @@ class PlayersController:
             replayed_player = self.check_chess_national_id_db(player_infos['chess_national_id'])
             if replayed_player:
                 self.player = Player(
-                    chess_national_id=replayed_player["Chess national ID"],
-                    number_of_player=replayed_player["Number of player"],
-                    name=replayed_player["Name"],
-                    birthday=replayed_player["Birthday"],
+                    chess_national_id=replayed_player[3],
+                    number_of_player=replayed_player[0],
+                    name=replayed_player[1],
+                    birthday=replayed_player[2],
                 )
 
             else:
                 self.player = Player(
+                    chess_national_id=player_infos['chess_national_id'],
                     number_of_player=number,
                     name=player_infos['name'],
                     birthday=player_infos['birthday'],
-                    chess_national_id=player_infos['chess_national_id'],
                 )
                 self.player.save_players_db()
 
@@ -45,7 +45,11 @@ class PlayersController:
             self.players_list.append(self.player)
         return self.players_list
 
-    def check_chess_national_id_db(self, player_chess_national_id) -> dict:
+    def check_chess_national_id_db(self, player_chess_national_id) -> list:
+        """Search chess national ID in DB.
+            :param: player_chess_national_id: Chess national id of players
+            :return:searched_player: players in DB
+        """
         searched_player = Player.search_player_db(player_chess_national_id)
         if searched_player:
             answer = Interface.ask_to_load_player()

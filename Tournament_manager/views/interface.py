@@ -25,11 +25,7 @@ class Interface:
     @staticmethod
     def introduction():
         """Game introduction"""
-        print("Welcome to the local chess tournament !\nThe tournament will feature a minimum of four "
-              "players and a maximum of ten.\nEach game will be played with a maximum of 100 moves.\nThe "
-              "winner of one match will play with the winner of another match"
-              "\n"
-              "\n")
+        print("Welcome to the local chess tournament !")
 
     @staticmethod
     def second_introduction():
